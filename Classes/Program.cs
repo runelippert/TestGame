@@ -31,48 +31,7 @@ namespace Classes
        
     }
 
-    class Match
-    {
-        //definition of home Team and away team
-        public Team homeTeam { get; set; }
 
-        public Team awayTeam { get; set; }
-
-        public List<Player> playersInMatch()
-        {
-            List<Player> playersInMatch = new List<Player>();
-
-            foreach (Player x in homeTeam.playersOnTeam)
-            {
-                playersInMatch.Add(x);
-            }
-
-            foreach (Player x in awayTeam.playersOnTeam)
-            {
-                playersInMatch.Add(x);
-            }
-
-            return playersInMatch;
-        }
-
-        //This doesn't work, even if postion and coordinate are the same, they don't get added to the list. 
-        public List<Player> getPlayersAtCoordinate(Coordinate coordinate, Match match)
-        {
-            List<Player> playersAtCoordinate = new List<Player> { };
-
-            //Check all players coordinate
-            foreach (Player somePlayer in match.playersInMatch())
-            {
-                if (somePlayer.position.x == coordinate.x)
-                    if (somePlayer.position.y == coordinate.y)
-                        {
-                            playersAtCoordinate.Add(somePlayer);
-                        }
-            };
-
-            return playersAtCoordinate;
-        }
-    }
 
     class Team
     {
@@ -149,7 +108,7 @@ namespace Classes
                 awayTeam = secondTeam
             };
                                    
-            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 1, name = "Alpha", position = new Coordinate(1, 1) });
+            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 1, name = "Alpha", position = new Coordinate(1, 3) });
             firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 2, name = "Beta", position = new Coordinate(1, 1) });
             secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 10, name = "Egon", position = new Coordinate(1, 1) });
             secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 11, name = "Benny", position = new Coordinate(1, 2) });
