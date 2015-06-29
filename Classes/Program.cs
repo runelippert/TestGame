@@ -11,6 +11,7 @@ namespace Classes
         public int shirtNumber { get; set; }
         public string name { get; set; }
         public Coordinate position { get; set; }
+        public Team team { get; set; }
 
     }
 
@@ -37,6 +38,8 @@ namespace Classes
     {
         // a list of players 
         public List<Player> playersOnTeam = new List<Player> { };
+
+        public string TeamName { get; set; }
         
     }
 
@@ -45,8 +48,8 @@ namespace Classes
     {
         static void Main(string[] args)
         {
-            Team firsteTeam = new Team();
-            Team secondTeam = new Team();
+            Team firsteTeam = new Team() { TeamName = "The greeks" };
+            Team secondTeam = new Team() { TeamName = "Olsen banden" };
 
             Match thisMatch = new Match()
             {
@@ -54,10 +57,10 @@ namespace Classes
                 awayTeam = secondTeam
             };
                                    
-            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 1, name = "Alpha", position = new Coordinate(1, 3) });
-            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 2, name = "Beta", position = new Coordinate(1, 1) });
-            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 10, name = "Egon", position = new Coordinate(1, 1) });
-            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 11, name = "Benny", position = new Coordinate(1, 2) });
+            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 1, name = "Alpha", position = new Coordinate(2, 1), team = firsteTeam });
+            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 2, name = "Beta", position = new Coordinate(1, 2), team = firsteTeam });
+            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 10, name = "Egon", position = new Coordinate(1, 1), team = secondTeam});
+            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 11, name = "Benny", position = new Coordinate(2, 2), team = secondTeam });
 
 
             //Check players at position 1,1
@@ -66,10 +69,14 @@ namespace Classes
             //Get players at 1,1 and add them to the var test. Check if there is anything in the variable test. 
             var test = thisMatch.getPlayersAtCoordinate(new Coordinate(1,1), thisMatch);
 
+
             foreach(Player somePayer in test)
             {
-                Console.WriteLine(somePayer.name + " is at position 1,1");
+                Console.WriteLine(somePayer.name + " is at position 1,1 and is part of team " + somePayer.team.TeamName);
             }
+
+
+
                         
             //Console.WriteLine("Player {0}'s position is {1},{2}", firsteTeam.playersOnTeam[0].shirtNumber, firsteTeam.playersOnTeam[0].position.x, firsteTeam.playersOnTeam[0].position.y);
             //Console.WriteLine("Player {0}'s position is {1},{2}", firsteTeam.playersOnTeam[1].shirtNumber, firsteTeam.playersOnTeam[1].position.x, firsteTeam.playersOnTeam[1].position.y);
@@ -115,6 +122,24 @@ namespace Classes
             BasicActions.movePlayer(playerToTakeOrder, order);
 
             Console.WriteLine("new position for {0}: {1},{2}", playerToTakeOrder.name, playerToTakeOrder.position.x, playerToTakeOrder.position.y);
+
+            List<Player> greekPlayersAtCoordinate = new List<Player>();
+            List<Player> olsenPlayerAtCoordinate = new List<Player>();
+
+            foreach (Player somePlayer in thisMatch.getPlayersAtCoordinate(new Coordinate(2, 2), thisMatch))
+            {
+                if (somePlayer.team.TeamName == firsteTeam.TeamName)
+                {
+                    greekPlayersAtCoordinate.Add(somePlayer);
+                }
+                else
+                {
+                    olsenPlayerAtCoordinate.Add(somePlayer);
+                }
+            }
+
+            Console.WriteLine(firsteTeam.TeamName + " has " + greekPlayersAtCoordinate.Count + " players at coordinate 2,2");
+            Console.WriteLine(secondTeam.TeamName + " has " + olsenPlayerAtCoordinate.Count + " players at coordinate 2,2");
 
       
         }
