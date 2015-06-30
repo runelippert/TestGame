@@ -123,23 +123,13 @@ namespace Classes
 
             Console.WriteLine("new position for {0}: {1},{2}", playerToTakeOrder.name, playerToTakeOrder.position.x, playerToTakeOrder.position.y);
 
-            List<Player> greekPlayersAtCoordinate = new List<Player>();
-            List<Player> olsenPlayerAtCoordinate = new List<Player>();
+            thisMatch.rollForEngagement(new Coordinate(1, 1), thisMatch);
+            
+             
 
-            foreach (Player somePlayer in thisMatch.getPlayersAtCoordinate(new Coordinate(2, 2), thisMatch))
-            {
-                if (somePlayer.team.TeamName == firsteTeam.TeamName)
-                {
-                    greekPlayersAtCoordinate.Add(somePlayer);
-                }
-                else
-                {
-                    olsenPlayerAtCoordinate.Add(somePlayer);
-                }
-            }
 
-            Console.WriteLine(firsteTeam.TeamName + " has " + greekPlayersAtCoordinate.Count + " players at coordinate 2,2");
-            Console.WriteLine(secondTeam.TeamName + " has " + olsenPlayerAtCoordinate.Count + " players at coordinate 2,2");
+ 
+
 
       
         }
