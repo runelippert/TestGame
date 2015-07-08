@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Classes
 {
-    class Player
+    public class Player
     {
         public int shirtNumber { get; set; }
         public string name { get; set; }
@@ -20,7 +20,7 @@ namespace Classes
     //       public Coordinate postion { get; set;}
     //}
 
-    class Coordinate
+    public class Coordinate
     {
         public Coordinate(int _x, int _y) {
         x = _x;
@@ -34,7 +34,7 @@ namespace Classes
 
 
 
-    class Team
+    public class Team
     {
         // a list of players 
         public List<Player> playersOnTeam = new List<Player> { };
