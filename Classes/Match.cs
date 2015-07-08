@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Classes
 {
-    class Match
+    public class Match
     {
             //definition of home Team and away team
             public Team homeTeam { get; set; }
