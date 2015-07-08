@@ -60,15 +60,17 @@ namespace Classes
                 awayTeam = secondTeam
             };
 
-           Board gameBoard = new Board();
-
-           gameBoard.drawBoard();
 
                                    
             firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 1, name = "Alpha", position = new Coordinate(2, 1), team = firsteTeam });
             firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 2, name = "Beta", position = new Coordinate(1, 2), team = firsteTeam });
             secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 10, name = "Egon", position = new Coordinate(1, 1), team = secondTeam});
             secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 11, name = "Benny", position = new Coordinate(2, 2), team = secondTeam });
+
+
+            Board gameBoard = new Board();
+
+            gameBoard.drawBoard(thisMatch);
 
 
             //Check players at position 1,1
