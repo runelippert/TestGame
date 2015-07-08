@@ -43,9 +43,12 @@ namespace Classes
         
     }
 
+
+
     
     class Program
     {
+
         static void Main(string[] args)
         {
             Team firsteTeam = new Team() { TeamName = "The greeks" };
@@ -56,6 +59,11 @@ namespace Classes
                 homeTeam = firsteTeam,
                 awayTeam = secondTeam
             };
+
+           Board gameBoard = new Board();
+
+           gameBoard.drawBoard();
+
                                    
             firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 1, name = "Alpha", position = new Coordinate(2, 1), team = firsteTeam });
             firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 2, name = "Beta", position = new Coordinate(1, 2), team = firsteTeam });
@@ -127,6 +135,8 @@ namespace Classes
             
       
         }
+
+        
 
 
     }
