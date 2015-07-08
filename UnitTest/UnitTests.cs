@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace UnitTests
 {
-    public class Class1
+    public class UnitTests
     {
         [Fact]
         public void getPlayersAtCoordinateTest()
@@ -43,18 +43,53 @@ namespace UnitTests
 
         }
 
-
         [Fact]
-        public void falingTest()
+        public void rollForEngagementTest()
         {
-            Assert.Equal(5, Add(2, 2));
+            //Arrange
+            Team firsteTeam = new Team() { TeamName = "The greeks" };
+            Team secondTeam = new Team() { TeamName = "Olsen banden" };
+
+            Match thisMatch = new Match()
+            {
+                homeTeam = firsteTeam,
+                awayTeam = secondTeam
+            };
+
+            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 1, name = "Alpha", position = new Coordinate(2, 1), team = firsteTeam });
+            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 2, name = "Beta", position = new Coordinate(1, 1), team = firsteTeam });
+            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 10, name = "Egon", position = new Coordinate(1, 1), team = secondTeam });
+            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 11, name = "Benny", position = new Coordinate(1, 1), team = secondTeam });
+
+            //Act
+            thisMatch.rollForEngagement(new Coordinate(1, 1), thisMatch);
+
+            //Assert
+            //TO DO roll for engagement needs to be updated to return a value or a string. 
+
         }
 
 
-        int Add(int x, int y)
+        [Theory]
+        [InlineData(6,6, "its a tie")]
+        [InlineData(6, 1, "The greeks is the winner")]
+        [InlineData(1, 3, "Olsen banden is the winner")]
+        public void findWinnerTest(int a, int b, string expectedResult)
         {
-            return x + y;
+            Rolls roll = new Rolls();
+
+            Team firsteTeam = new Team() { TeamName = "The greeks" };
+            Team secondTeam = new Team() { TeamName = "Olsen banden" };
+
+           //ACT
+            var result = roll.findWinner(firsteTeam, a, secondTeam, b);
+
+            //ASSERT
+            Assert.Equal(expectedResult, result);
         }
+
+
+
 
 
     }

@@ -125,12 +125,6 @@ namespace Classes
 
             thisMatch.rollForEngagement(new Coordinate(1, 1), thisMatch);
             
-             
-
-
- 
-
-
       
         }
 

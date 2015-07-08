@@ -74,24 +74,24 @@ namespace Classes
                 //roll for greek players at coordinate
                 Random rnd = new Random();
 
-                int rollGreek = rnd.Next(1, 7) + greekPlayersAtCoordinate.Count;
-                int rollOlsen = rnd.Next(1, 7) + olsenPlayerAtCoordinate.Count;
+                int rollGreek = rnd.Next(1, 7);
+                int rollOlsen = rnd.Next(1, 7);
 
                 Console.WriteLine(match.homeTeam.TeamName + " rolls " + rollGreek);
                 Console.WriteLine(match.awayTeam.TeamName + " rolls " + rollOlsen);
 
-                if (rollGreek > rollOlsen)
-                {
-                    Console.WriteLine(match.homeTeam.TeamName + " has won");
-                }
-                else if (rollGreek < rollOlsen)
-                {
-                    Console.WriteLine(match.awayTeam.TeamName + " has won");
-                }
-                else
-                {
-                    Console.WriteLine("its a tie");
-                }
+                //+2 til roll pr. player at coordinate.
+                int modifiedGreekRoll = rollGreek + greekPlayersAtCoordinate.Count * 2;
+                int modifiedOlsenRoll = rollOlsen + olsenPlayerAtCoordinate.Count * 2;
+
+                Console.WriteLine("greek modified roll is" + modifiedGreekRoll);
+                Console.WriteLine("Olsen modified roll is" + modifiedOlsenRoll);
+
+                Rolls roll = new Rolls();
+
+                string result = roll.findWinner(homeTeam, modifiedGreekRoll, awayTeam, modifiedOlsenRoll);
+
+                Console.WriteLine(result);
 
 
             }
