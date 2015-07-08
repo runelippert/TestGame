@@ -72,13 +72,13 @@ namespace Classes
                 Console.WriteLine(match.awayTeam.TeamName + " has " + olsenPlayerAtCoordinate.Count + " players at coordinate 2,2");
 
                 //roll for greek players at coordinate
-                Random rnd = new Random();
+                Rolls roll = new Rolls();
 
-                int rollGreek = rnd.Next(1, 7);
-                int rollOlsen = rnd.Next(1, 7);
+                int rollGreek = roll.rollD6();
+                int rollOlsen = roll.rollD6();
 
-                Console.WriteLine(match.homeTeam.TeamName + " rolls " + rollGreek);
-                Console.WriteLine(match.awayTeam.TeamName + " rolls " + rollOlsen);
+                Console.WriteLine(match.homeTeam.TeamName + " rolls " + roll.rollD6());
+                Console.WriteLine(match.awayTeam.TeamName + " rolls " + roll.rollD6());
 
                 //+2 til roll pr. player at coordinate.
                 int modifiedGreekRoll = rollGreek + greekPlayersAtCoordinate.Count * 2;
@@ -86,8 +86,6 @@ namespace Classes
 
                 Console.WriteLine("greek modified roll is" + modifiedGreekRoll);
                 Console.WriteLine("Olsen modified roll is" + modifiedOlsenRoll);
-
-                Rolls roll = new Rolls();
 
                 string result = roll.findWinner(homeTeam, modifiedGreekRoll, awayTeam, modifiedOlsenRoll);
 

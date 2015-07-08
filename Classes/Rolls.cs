@@ -8,6 +8,15 @@ namespace Classes
 {
     public class Rolls
     {
+        public int rollD6()
+        {
+                Random rnd = new Random();
+
+                int result = rnd.Next(1, 7);
+
+                return result;
+        }
+
         public string findWinner(Team one, int rollOne, Team two, int rollTwo)
         {
             if (rollOne > rollTwo)
