@@ -93,32 +93,11 @@ namespace Classes
 
             //list all players in match
 
-            Console.WriteLine("Type direction to move Player: ");
-            var giveOrder = Console.ReadLine();
-            var order = new BasicActions.moves();
-
-            switch(giveOrder)
-            {
-                case "left":
-                    order = BasicActions.moves.left;
-                    break;
-                case "rigth":
-                    order = BasicActions.moves.rigth;
-                    break;
-                case "forward":
-                    order = BasicActions.moves.forward;
-                    break;
-                case "back":
-                    order = BasicActions.moves.back;
-                    break;
-
-            }
-
             Console.WriteLine("select player by typeing 1 or 2");
             var selectPlayer = Console.ReadLine();
             var playerToTakeOrder = new Player();
 
-            switch(selectPlayer)
+            switch (selectPlayer)
             {
                 case "1":
                     playerToTakeOrder = firsteTeam.playersOnTeam[0];
@@ -129,12 +108,40 @@ namespace Classes
 
             }
 
+            Console.WriteLine("Hit arrowkey for direction to move {0}: ", playerToTakeOrder.name);
+            var order = new BasicActions.moves();
+
+            ConsoleKeyInfo keyInfo = Console.ReadKey();
+
+            //while ((keyInfo = Console.ReadKey(true)).Key != ConsoleKey.Escape)
+            //{
+                switch(keyInfo.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        order = BasicActions.moves.forward;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        order = BasicActions.moves.back;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        order = BasicActions.moves.left;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        order = BasicActions.moves.rigth;
+                        break;
+                }
+            //}
+
+
+
+
             BasicActions.movePlayer(playerToTakeOrder, order);
 
             Console.WriteLine("new position for {0}: {1},{2}", playerToTakeOrder.name, playerToTakeOrder.position.x, playerToTakeOrder.position.y);
 
             thisMatch.rollForEngagement(new Coordinate(1, 1), thisMatch);
-            
+
+            gameBoard.drawBoard(thisMatch);
       
         }
 
