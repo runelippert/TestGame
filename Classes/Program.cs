@@ -6,31 +6,14 @@ using System.Threading.Tasks;
 
 namespace Classes
 {
-    public class Player
-    {
-        public int shirtNumber { get; set; }
-        public string name { get; set; }
-        public Coordinate position { get; set; }
-        public Team team { get; set; }
 
-    }
 
     //class playingField
     //{
     //       public Coordinate postion { get; set;}
     //}
 
-    public class Coordinate
-    {
-        public Coordinate(int _x, int _y) {
-        x = _x;
-        y = _y;
-    }
-    public int x { get; set; }
-    public int y { get; set; }
 
-       
-    }
 
 
 
@@ -60,6 +43,7 @@ namespace Classes
                 awayTeam = secondTeam
             };
 
+            Player players = new Player();
 
                                    
             firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 1, name = "Alpha", position = new Coordinate(2, 1), team = firsteTeam });
@@ -79,69 +63,21 @@ namespace Classes
             //Get players at 1,1 and add them to the var test. Check if there is anything in the variable test. 
             var test = thisMatch.getPlayersAtCoordinate(new Coordinate(1,1), thisMatch);
 
-
             foreach(Player somePayer in test)
             {
                 Console.WriteLine(somePayer.name + " is at position 1,1 and is part of team " + somePayer.team.TeamName);
             }
 
+            //Assign orders to all players in the match
+            players.giveOrders(thisMatch);
+
+            //Execute Orders
+            players.executeOrders(thisMatch);
+
+            //Resolve encounters
 
 
-            Console.WriteLine("select player:");
-            Console.WriteLine("1 = " + firsteTeam.playersOnTeam[0].name);
-            Console.WriteLine("2 = " + firsteTeam.playersOnTeam[1].name);
-            Console.WriteLine("3 = " + secondTeam.playersOnTeam[0].name);
-            Console.WriteLine("4 = " + secondTeam.playersOnTeam[1].name);
-
-            var selectPlayer = Console.ReadLine();
-            var playerToTakeOrder = new Player();
-
-            switch (selectPlayer)
-            {
-                case "1":
-                    playerToTakeOrder = firsteTeam.playersOnTeam[0];
-                    break;
-                case "2":
-                    playerToTakeOrder = firsteTeam.playersOnTeam[1];
-                    break;
-                case "3":
-                    playerToTakeOrder = secondTeam.playersOnTeam[0];
-                    break;
-                case "4":
-                    playerToTakeOrder = secondTeam.playersOnTeam[1];
-                    break;
-            }
-
-            Console.WriteLine("Hit arrowkey for direction to move {0}: ", playerToTakeOrder.name);
-            var order = new BasicActions.moves();
-
-            ConsoleKeyInfo keyInfo = Console.ReadKey();
-
-            //while ((keyInfo = Console.ReadKey(true)).Key != ConsoleKey.Escape)
-            //{
-                switch(keyInfo.Key)
-                {
-                    case ConsoleKey.UpArrow:
-                        order = BasicActions.moves.down;
-                        break;
-                    case ConsoleKey.DownArrow:
-                        order = BasicActions.moves.up;
-                        break;
-                    case ConsoleKey.LeftArrow:
-                        order = BasicActions.moves.left;
-                        break;
-                    case ConsoleKey.RightArrow:
-                        order = BasicActions.moves.rigth;
-                        break;
-                }
-            //}
-
-
-
-
-            BasicActions.movePlayer(playerToTakeOrder, order);
-
-            Console.WriteLine("new position for {0}: {1},{2}", playerToTakeOrder.name, playerToTakeOrder.position.x, playerToTakeOrder.position.y);
+            //Console.WriteLine("new position for {0}: {1},{2}", playerToTakeOrder.name, playerToTakeOrder.position.x, playerToTakeOrder.position.y);
 
             thisMatch.rollForEngagement(new Coordinate(1, 1), thisMatch);
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Classes
 {
-    class BasicActions
+    public class BasicActions
     {
         public moves move { get; set; }
         public enum moves
@@ -25,8 +25,8 @@ namespace Classes
 
             if (moveTo == BasicActions.moves.down)
             {
-                Console.WriteLine("{0} trying to go forward", playerToMove.name);
-                playerToMove.position.y--;
+                Console.WriteLine("{0} trying to go down", playerToMove.name);
+                playerToMove.position.y++;
                 return playerToMove.position;
             }
             if (moveTo == BasicActions.moves.left)
@@ -43,8 +43,8 @@ namespace Classes
             }
             if (moveTo == BasicActions.moves.up)
             {
-                Console.WriteLine("{0} trying to go back", playerToMove.name);
-                playerToMove.position.y++;
+                Console.WriteLine("{0} trying to go up", playerToMove.name);
+                playerToMove.position.y--;
                 return playerToMove.position;
             }
             else
