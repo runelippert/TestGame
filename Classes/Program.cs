@@ -87,13 +87,12 @@ namespace Classes
 
 
 
-                        
-            //Console.WriteLine("Player {0}'s position is {1},{2}", firsteTeam.playersOnTeam[0].shirtNumber, firsteTeam.playersOnTeam[0].position.x, firsteTeam.playersOnTeam[0].position.y);
-            //Console.WriteLine("Player {0}'s position is {1},{2}", firsteTeam.playersOnTeam[1].shirtNumber, firsteTeam.playersOnTeam[1].position.x, firsteTeam.playersOnTeam[1].position.y);
+            Console.WriteLine("select player:");
+            Console.WriteLine("1 = " + firsteTeam.playersOnTeam[0].name);
+            Console.WriteLine("2 = " + firsteTeam.playersOnTeam[1].name);
+            Console.WriteLine("3 = " + secondTeam.playersOnTeam[0].name);
+            Console.WriteLine("4 = " + secondTeam.playersOnTeam[1].name);
 
-            //list all players in match
-
-            Console.WriteLine("select player by typeing 1 or 2");
             var selectPlayer = Console.ReadLine();
             var playerToTakeOrder = new Player();
 
@@ -105,7 +104,12 @@ namespace Classes
                 case "2":
                     playerToTakeOrder = firsteTeam.playersOnTeam[1];
                     break;
-
+                case "3":
+                    playerToTakeOrder = secondTeam.playersOnTeam[0];
+                    break;
+                case "4":
+                    playerToTakeOrder = secondTeam.playersOnTeam[1];
+                    break;
             }
 
             Console.WriteLine("Hit arrowkey for direction to move {0}: ", playerToTakeOrder.name);
@@ -118,10 +122,10 @@ namespace Classes
                 switch(keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        order = BasicActions.moves.forward;
+                        order = BasicActions.moves.down;
                         break;
                     case ConsoleKey.DownArrow:
-                        order = BasicActions.moves.back;
+                        order = BasicActions.moves.up;
                         break;
                     case ConsoleKey.LeftArrow:
                         order = BasicActions.moves.left;

@@ -11,10 +11,10 @@ namespace Classes
         public moves move { get; set; }
         public enum moves
         {
-            forward,
+            down,
             left,
             rigth,
-            back
+            up
         }
 
         public static Coordinate movePlayer(Player playerToMove, moves order)
@@ -23,10 +23,10 @@ namespace Classes
 
             BasicActions.moves moveTo = order;
 
-            if (moveTo == BasicActions.moves.forward)
+            if (moveTo == BasicActions.moves.down)
             {
                 Console.WriteLine("{0} trying to go forward", playerToMove.name);
-                playerToMove.position.y++;
+                playerToMove.position.y--;
                 return playerToMove.position;
             }
             if (moveTo == BasicActions.moves.left)
@@ -41,10 +41,10 @@ namespace Classes
                 playerToMove.position.x++;
                 return playerToMove.position;
             }
-            if (moveTo == BasicActions.moves.back)
+            if (moveTo == BasicActions.moves.up)
             {
                 Console.WriteLine("{0} trying to go back", playerToMove.name);
-                playerToMove.position.y--;
+                playerToMove.position.y++;
                 return playerToMove.position;
             }
             else

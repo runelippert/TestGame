@@ -31,7 +31,10 @@ namespace Classes
                 Console.Write("|");
                 if (playersAtCoordinate.Count > 0)
                 {
-                    Console.Write(match.getPlayersAtCoordinate(coordinate, match)[0].name);
+                    foreach (var x in match.getPlayersAtCoordinate(coordinate, match))
+                    {
+                        Console.Write(x.name + " ");
+                    }
                 }
                 Console.Write("{0},{1}", coordinate.x, coordinate.y);
             }
