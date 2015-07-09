@@ -23,6 +23,9 @@ namespace Classes
                 Console.WriteLine("{0} spiller for {1} med nummer {2}", player.name, player.team.TeamName, player.shirtNumber);
                 Console.WriteLine("Give order to {0}", player.name);
 
+                //Get Direction
+
+
                 Console.WriteLine("Hit arrowkey for direction to move {0}: ", player.name);
                 var action = new BasicActions();
 

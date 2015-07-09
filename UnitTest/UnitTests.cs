@@ -91,8 +91,24 @@ namespace UnitTests
 
         //TO DO - write move tests
 
+        [Theory]
+        [InlineData(BasicActions.moves.up, 1, 0)]
+        [InlineData(BasicActions.moves.down, 1,2)]
+        [InlineData(BasicActions.moves.left, 0, 1 )]
+        [InlineData(BasicActions.moves.rigth, 2, 1)]
+    
+        public void movePlayerTest(BasicActions.moves action, int end_x, int end_y )
+        {
+            //Arrange
+            Player alfred = new Player(){ name="Alfred", position=new Coordinate(1,1)};
 
+            //act
+            BasicActions.movePlayer(alfred, action);
 
+            //Assert
+            Assert.Equal(end_x, alfred.position.x);
+            Assert.Equal(end_y, alfred.position.y);
+        }
 
     }
 }
