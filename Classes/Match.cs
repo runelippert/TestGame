@@ -13,16 +13,16 @@ namespace Classes
 
             public Team awayTeam { get; set; }
 
-            public List<Player> playersInMatch()
+            public List<Player> playersInMatch(Match match)
             {
                 List<Player> playersInMatch = new List<Player>();
 
-                foreach (Player x in homeTeam.playersOnTeam)
+                foreach (Player x in match.homeTeam.playersOnTeam)
                 {
                     playersInMatch.Add(x);
                 }
 
-                foreach (Player x in awayTeam.playersOnTeam)
+                foreach (Player x in match.awayTeam.playersOnTeam)
                 {
                     playersInMatch.Add(x);
                 }
@@ -35,7 +35,7 @@ namespace Classes
                 List<Player> playersAtCoordinate = new List<Player> { };
 
                 //Check all players coordinate
-                foreach (Player somePlayer in match.playersInMatch())
+                foreach (Player somePlayer in match.playersInMatch(match))
                 {
                     if (somePlayer.position.x == coordinate.x)
                         if (somePlayer.position.y == coordinate.y)
@@ -46,53 +46,42 @@ namespace Classes
 
                 return playersAtCoordinate;
             }
-            
-            /// <summary>
-            /// Finds number of players for each team at a coordinate at rolls to find a winner
-            /// 
-            /// </summary>
-            public void rollForEngagement(Coordinate coordinate, Match match)
-            {
-                List<Player> greekPlayersAtCoordinate = new List<Player>();
-                List<Player> olsenPlayerAtCoordinate = new List<Player>();
 
-                foreach (Player somePlayer in match.getPlayersAtCoordinate(new Coordinate(2, 2), match))
+            public Match setupMatch()
+            {
+                Team homeTeam = new Team() { TeamName = "The greeks" };
+                Team awayTeam = new Team() { TeamName = "Olsen banden" };
+
+                Match thisMatch = new Match()
                 {
-                    if (somePlayer.team.TeamName == match.homeTeam.TeamName)
-                    {
-                        greekPlayersAtCoordinate.Add(somePlayer);
-                    }
-                    else
-                    {
-                        olsenPlayerAtCoordinate.Add(somePlayer);
-                    }
+                    homeTeam = homeTeam,
+                    awayTeam = awayTeam
+                };
+
+                Console.WriteLine("--PRESENTING THE HOME TEAM: {0}", homeTeam.TeamName);
+                Console.WriteLine("--PRESENTING THE AWAY TEAM: {0}", awayTeam.TeamName);
+
+                Player players = new Player();
+
+                homeTeam.playersOnTeam.Add(new Player() { shirtNumber = 1, name = "Alpha", position = new Coordinate(2, 1), team = homeTeam });
+                homeTeam.playersOnTeam.Add(new Player() { shirtNumber = 2, name = "Beta", position = new Coordinate(1, 2), team = homeTeam });
+                awayTeam.playersOnTeam.Add(new Player() { shirtNumber = 10, name = "Egon", position = new Coordinate(1, 1), team = awayTeam });
+                awayTeam.playersOnTeam.Add(new Player() { shirtNumber = 11, name = "Benny", position = new Coordinate(2, 2), team = awayTeam });
+
+                foreach(Player player in homeTeam.playersOnTeam)
+                {
+                    Console.WriteLine("For {0} first player is #{1} {2}", homeTeam.TeamName, player.shirtNumber, player.name);
                 }
 
-                Console.WriteLine(match.homeTeam.TeamName + " has " + greekPlayersAtCoordinate.Count + " players at coordinate 2,2");
-                Console.WriteLine(match.awayTeam.TeamName + " has " + olsenPlayerAtCoordinate.Count + " players at coordinate 2,2");
+                foreach(Player player in awayTeam.playersOnTeam)
+                {
+                    Console.WriteLine("For {0} first player is #{1} {2}", awayTeam.TeamName, player.shirtNumber, player.name);
 
-                //roll for greek players at coordinate
-                Rolls roll = new Rolls();
-
-                int rollGreek = roll.rollD6();
-                int rollOlsen = roll.rollD6();
-
-                Console.WriteLine(match.homeTeam.TeamName + " rolls " + roll.rollD6());
-                Console.WriteLine(match.awayTeam.TeamName + " rolls " + roll.rollD6());
-
-                //+2 til roll pr. player at coordinate.
-                int modifiedGreekRoll = rollGreek + greekPlayersAtCoordinate.Count * 2;
-                int modifiedOlsenRoll = rollOlsen + olsenPlayerAtCoordinate.Count * 2;
-
-                Console.WriteLine("greek modified roll is" + modifiedGreekRoll);
-                Console.WriteLine("Olsen modified roll is" + modifiedOlsenRoll);
-
-                string result = roll.findWinner(homeTeam, modifiedGreekRoll, awayTeam, modifiedOlsenRoll);
-
-                Console.WriteLine(result);
-
-
+                }
+                
+                return thisMatch;
             }
-        
+            
+
     }
 }

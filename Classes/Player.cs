@@ -18,7 +18,7 @@ namespace Classes
         {
             //Give players orders
             //try to do a foreach in players in match to give them orders
-            foreach (Player player in match.playersInMatch())
+            foreach (Player player in match.playersInMatch(match))
             {
                 Console.WriteLine("{0} spiller for {1} med nummer {2}", player.name, player.team.TeamName, player.shirtNumber);
                 Console.WriteLine("Give order to {0}", player.name);
@@ -64,7 +64,7 @@ namespace Classes
 
         public void executeOrders(Match match)
         {
-            foreach (Player player in match.playersInMatch())
+            foreach (Player player in match.playersInMatch(match))
             {
                 BasicActions.movePlayer(player, player.action.move);
             }

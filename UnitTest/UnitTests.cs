@@ -62,7 +62,8 @@ namespace UnitTests
             secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 11, name = "Benny", position = new Coordinate(1, 1), team = secondTeam });
 
             //Act
-            thisMatch.rollForEngagement(new Coordinate(1, 1), thisMatch);
+            Rolls roll = new Rolls();
+            roll.rollForEngagement(new Coordinate(1, 1), thisMatch);
 
             //Assert
             //TO DO roll for engagement needs to be updated to return a value or a string. 
