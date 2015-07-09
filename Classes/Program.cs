@@ -42,13 +42,23 @@ namespace Classes
 
             gameBoard.drawBoard(thisMatch);
 
-            //Assign orders to all players in the match
-            players.giveOrders(thisMatch);
+            //Turn loop
+            for (int turn = 1; turn <= 9; turn++)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Start of turn {0}", turn);
+                //Assign orders to all players in the match
+                players.giveOrders(thisMatch);
 
-            //Execute Orders
-            players.executeOrders(thisMatch);
+                //Execute Orders
+                players.executeOrders(thisMatch);
 
-            //Resolve encounters
+                //Resolve encounters
+                Console.WriteLine("!-----New Turn------!");
+
+                gameBoard.drawBoard(thisMatch);
+            }
+
 
 
             //Console.WriteLine("new position for {0}: {1},{2}", playerToTakeOrder.name, playerToTakeOrder.position.x, playerToTakeOrder.position.y);
@@ -56,8 +66,8 @@ namespace Classes
 
             roll.rollForEngagement(new Coordinate(1, 1), thisMatch);
 
-            Console.WriteLine("!-----New Turn------!");
-            gameBoard.drawBoard(thisMatch);
+            
+            
       
         }
 
