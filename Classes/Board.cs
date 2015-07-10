@@ -10,40 +10,123 @@ namespace Classes
     {
         public void drawBoard(Match match)
         {
-            for(int i = 0; i <= 7; i++)
+            foreach (Coordinate coordinate in boardCordinates())
             {
-                drawRow(i, match);               
-            }
-        }
 
-        void drawRow(int y, Match match)
-        {
-            List<Coordinate> fieldPoistionsRow1 = new List<Coordinate>();
-
-            fieldPoistionsRow1.Add(new Coordinate(0, y));
-            fieldPoistionsRow1.Add(new Coordinate(1, y));
-            fieldPoistionsRow1.Add(new Coordinate(2, y));
-
-            foreach (var coordinate in fieldPoistionsRow1)
-            {
                 List<Player> playersAtCoordinate = match.getPlayersAtCoordinate(coordinate, match);
 
-                Console.Write("|");
-                if (playersAtCoordinate.Count > 0)
+                if (coordinate.y == 0)
                 {
-                    foreach (var x in match.getPlayersAtCoordinate(coordinate, match))
-                    {
-                        Console.Write(x.name + " ");
-                    }
+                    drawRow(coordinate.y, match, playersAtCoordinate, coordinate);
                 }
-                Console.Write("{0},{1}", coordinate.x, coordinate.y);
+                if (coordinate.y == 0 && coordinate.x == 2)
+                {
+                    Console.Write("|");
+                    Console.WriteLine("");
+                    Console.WriteLine("---------------------");
+                }
+                if (coordinate.y == 1)
+                {
+                    drawRow(coordinate.y, match, playersAtCoordinate, coordinate);
+                }
+                if (coordinate.y == 1 && coordinate.x == 2)
+                {
+                    Console.Write("|");
+                    Console.WriteLine("");
+                    Console.WriteLine("---------------------");
+                }
+                if (coordinate.y == 2)
+                {
+                    drawRow(coordinate.y, match, playersAtCoordinate, coordinate);
+                }
+                if (coordinate.y == 2 && coordinate.x == 2)
+                {
+                    Console.Write("|");
+                    Console.WriteLine("");
+                    Console.WriteLine("---------------------");
+                }
+                if (coordinate.y == 3)
+                {
+                    drawRow(coordinate.y, match, playersAtCoordinate, coordinate);
+                }
+                if (coordinate.y == 3 && coordinate.x == 2)
+                {
+                    Console.Write("|");
+                    Console.WriteLine("");
+                    Console.WriteLine("---------------------");
+                }
+                if (coordinate.y == 4)
+                {
+                    drawRow(coordinate.y, match, playersAtCoordinate, coordinate);
+                }
+                if (coordinate.y == 4 && coordinate.x == 2)
+                {
+                    Console.Write("|");
+                    Console.WriteLine("");
+                    Console.WriteLine("---------------------");
+                }
+                if (coordinate.y == 5)
+                {
+                    drawRow(coordinate.y, match, playersAtCoordinate, coordinate);
+                }
+                if (coordinate.y == 5 && coordinate.x == 2)
+                {
+                    Console.Write("|");
+                    Console.WriteLine("");
+                    Console.WriteLine("---------------------");
+                }
+                if (coordinate.y == 6)
+                {
+                    drawRow(coordinate.y, match, playersAtCoordinate, coordinate);
+                }
+                if (coordinate.y == 6 && coordinate.x == 2)
+                {
+                    Console.Write("|");
+                    Console.WriteLine("");
+                    Console.WriteLine("---------------------");
+                }
+                if (coordinate.y == 7)
+                {
+                    drawRow(coordinate.y, match, playersAtCoordinate, coordinate);
+                }
+                if (coordinate.y == 7 && coordinate.x == 2)
+                {
+                    Console.Write("|");
+                    Console.WriteLine("");
+                    Console.WriteLine("---------------------");
+                }
             }
-
-            Console.WriteLine("|");
-            Console.WriteLine("-----------------------------");
-
+            
         }
 
+        void drawRow(int y, Match match, List<Player> playersAtCoordinate, Coordinate coordinate)
+        {
+            Console.Write("|");
+            if (playersAtCoordinate.Count > 0)
+            {
+                foreach (var x in match.getPlayersAtCoordinate(coordinate, match))
+                {
+                    Console.Write(x.name + " ");
+                }
+            }
+            Console.Write("{0},{1}", coordinate.x, coordinate.y);
+        }
+
+
+        public List<Coordinate> boardCordinates()
+        {
+            List<Coordinate> boardCordinates = new List<Coordinate>();
+                        
+            //i = number of rows on the board
+            for (int i = 0; i <= 7; i++)
+            {
+                boardCordinates.Add(new Coordinate(0, i));
+                boardCordinates.Add(new Coordinate(1, i));
+                boardCordinates.Add(new Coordinate(2, i));
+            }
+
+            return boardCordinates;
+        }
 
     }
 

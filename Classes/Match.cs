@@ -81,6 +81,20 @@ namespace Classes
                 
                 return thisMatch;
             }
+
+        public List<Coordinate> getAllCordinatesWithPlayersFromBothTeams(Match match)
+        {
+            List<Coordinate> Coordinates = new List<Coordinate>();
+
+            //Foreach coordinate
+            //Get players at coordinate
+            //Check if there is more then 1 team
+            //add coordinate to list
+                
+
+
+            return Coordinates;
+        }
             
 
     }
