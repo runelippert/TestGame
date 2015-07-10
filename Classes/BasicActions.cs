@@ -8,49 +8,56 @@ namespace Classes
 {
     public class BasicActions
     {
-        public moves move { get; set; }
-        public enum moves
+        public Actions action { get; set; }
+
+        public enum Actions
         {
             down,
             left,
             rigth,
-            up
+            up,
+            protect
         }
 
-        public static Coordinate movePlayer(Player playerToMove, moves order)
+        public static Coordinate takeAction(Player playerToTakeAction, Actions order)
         {
-            Coordinate currentPosition = playerToMove.position;
+            Coordinate currentPosition = playerToTakeAction.position;
 
-            BasicActions.moves moveTo = order;
+            BasicActions.Actions moveTo = order;
 
-            if (moveTo == BasicActions.moves.down)
+            if (order == BasicActions.Actions.down)
             {
-                Console.WriteLine("{0} trying to go down", playerToMove.name);
-                playerToMove.position.y++;
-                return playerToMove.position;
+                Console.WriteLine("{0} trying to go down", playerToTakeAction.name);
+                playerToTakeAction.position.y++;
+                return playerToTakeAction.position;
             }
-            if (moveTo == BasicActions.moves.left)
+            if (order == BasicActions.Actions.left)
             {
-                Console.WriteLine("{0} trying to go left", playerToMove.name);
-                playerToMove.position.x--;
-                return playerToMove.position;
+                Console.WriteLine("{0} trying to go left", playerToTakeAction.name);
+                playerToTakeAction.position.x--;
+                return playerToTakeAction.position;
             }
-            if (moveTo == BasicActions.moves.rigth)
+            if (order == BasicActions.Actions.rigth)
             {
-                Console.WriteLine("{0} trying to go rigth", playerToMove.name);
-                playerToMove.position.x++;
-                return playerToMove.position;
+                Console.WriteLine("{0} trying to go rigth", playerToTakeAction.name);
+                playerToTakeAction.position.x++;
+                return playerToTakeAction.position;
             }
-            if (moveTo == BasicActions.moves.up)
+            if (order == BasicActions.Actions.up)
             {
-                Console.WriteLine("{0} trying to go up", playerToMove.name);
-                playerToMove.position.y--;
-                return playerToMove.position;
+                Console.WriteLine("{0} trying to go up", playerToTakeAction.name);
+                playerToTakeAction.position.y--;
+                return playerToTakeAction.position;
+            }
+            if (order == BasicActions.Actions.protect)
+            {
+                Console.WriteLine("{0} protecting", playerToTakeAction.name);
+                return playerToTakeAction.position;
             }
             else
             {
                 Console.WriteLine("Could not understand player move");
-                return playerToMove.position;
+                return playerToTakeAction.position;
             }
         }
 

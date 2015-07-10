@@ -26,7 +26,7 @@ namespace Classes
                 //Get Direction
 
 
-                Console.WriteLine("Hit arrowkey for direction to move {0}: ", player.name);
+                Console.WriteLine("Hit arrowkey for direction to move or space to protect for {0}: ", player.name);
                 var action = new BasicActions();
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
@@ -36,16 +36,19 @@ namespace Classes
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        action.move = BasicActions.moves.up;
+                        action.action = BasicActions.Actions.up;
                         break;
                     case ConsoleKey.DownArrow:
-                        action.move = BasicActions.moves.down;
+                        action.action = BasicActions.Actions.down;
                         break;
                     case ConsoleKey.LeftArrow:
-                        action.move = BasicActions.moves.left;
+                        action.action = BasicActions.Actions.left;
                         break;
                     case ConsoleKey.RightArrow:
-                        action.move = BasicActions.moves.rigth;
+                        action.action = BasicActions.Actions.rigth;
+                        break;
+                    case ConsoleKey.Spacebar:
+                        action.action = BasicActions.Actions.protect;
                         break;
                 }
                 //}
@@ -53,7 +56,7 @@ namespace Classes
                 //Assign player Order
                 player.action = action;
 
-                Console.WriteLine(player.name + " has the action " + player.action.move);
+                Console.WriteLine(player.name + " has the action " + player.action.action);
                 Console.WriteLine("----------------------------");
 
 
@@ -66,7 +69,7 @@ namespace Classes
         {
             foreach (Player player in match.playersInMatch(match))
             {
-                BasicActions.movePlayer(player, player.action.move);
+                BasicActions.takeAction(player, player.action.action);
             }
         }
     
