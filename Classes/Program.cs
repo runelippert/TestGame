@@ -53,6 +53,14 @@ namespace Classes
                 //Execute Orders
                 players.executeOrders(thisMatch);
 
+                //Find encounters - doesn't seem to work
+                List<Coordinate> engagements = thisMatch.compairePlayersCoordinates(thisMatch);
+
+                foreach (Coordinate coordinate in engagements)
+                {
+                    Console.WriteLine("Engagement at {0},{1}", coordinate.x, coordinate.y);
+                }
+
                 //Resolve encounters
                 Console.WriteLine("!-----New Turn------!");
 

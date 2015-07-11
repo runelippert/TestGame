@@ -140,6 +140,15 @@ namespace Classes
         public int x { get; set; }
         public int y { get; set; }
 
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Coordinate))
+            {
+                return false;
+            }
+            Coordinate coordinate = (Coordinate)obj;
+            return ((coordinate.x == this.x) && (coordinate.y == this.y));
+        }
 
     }
 }

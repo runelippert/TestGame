@@ -111,5 +111,36 @@ namespace UnitTests
             Assert.Equal(end_y, alfred.position.y);
         }
 
+
+        [Theory]
+        [InlineData(1,1,2,2,1)]
+
+        public void compairePlayerPostionTest(int x1, int y1, int x2, int y2, int numberOfResults)
+        {
+            //Arrange
+            Team firsteTeam = new Team() { TeamName = "The greeks" };
+            Team secondTeam = new Team() { TeamName = "Olsen banden" };
+
+            Match thisMatch = new Match()
+            {
+                homeTeam = firsteTeam,
+                awayTeam = secondTeam
+            };
+
+            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 1, name = "Alpha", position = new Coordinate(x2, y2), team = firsteTeam });
+            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 2, name = "Beta", position = new Coordinate(x1, y1), team = firsteTeam });
+            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 10, name = "Egon", position = new Coordinate(x1, y1), team = secondTeam });
+            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 11, name = "Benny", position = new Coordinate(x1, y1), team = secondTeam });
+
+
+            //Act
+            List<Coordinate> result = thisMatch.compairePlayersCoordinates(thisMatch);
+
+            //Assert
+            Assert.Equal(new Coordinate(x1, y1), result[0]);
+            Assert.Equal(1, numberOfResults);
+        }
+
+
     }
 }
