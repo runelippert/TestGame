@@ -17,19 +17,29 @@ namespace Classes
                 return result;
         }
 
-        public string findWinner(Team one, int rollOne, Team two, int rollTwo)
+        public enum resultOfEngagement
+        {
+            homeTeam,
+            awayTeam,
+            Tie
+        }
+
+        public resultOfEngagement findWinner(Team one, int rollOne, Team two, int rollTwo)
         {
             if (rollOne > rollTwo)
             {
-                return one.TeamName + " is the winner";
+                Console.WriteLine(one.TeamName + " is the winner");
+                return resultOfEngagement.homeTeam;
             }
             else if (rollOne < rollTwo)
             {
-                return two.TeamName + " is the winner";
+                Console.WriteLine(two.TeamName + " is the winner");
+                return resultOfEngagement.awayTeam;
             }
             else
             {
-                return "its a tie";
+                Console.WriteLine("its a tie");
+                return resultOfEngagement.Tie;
             }
 
         }
@@ -74,9 +84,9 @@ namespace Classes
             Console.WriteLine("greek modified roll is" + modifiedGreekRoll);
             Console.WriteLine("Olsen modified roll is" + modifiedOlsenRoll);
 
-            string result = roll.findWinner(match.homeTeam, modifiedGreekRoll, match.awayTeam, modifiedOlsenRoll);
+            resultOfEngagement result = roll.findWinner(match.homeTeam, modifiedGreekRoll, match.awayTeam, modifiedOlsenRoll);
 
-            Console.WriteLine(result);
+            Console.WriteLine(result.ToString());
 
 
         }

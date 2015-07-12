@@ -55,32 +55,18 @@ namespace Classes
 
                 //Find encounters - doesn't seem to work
                 List<Coordinate> engagements = thisMatch.compairePlayersCoordinates(thisMatch);
+                Rolls roll = new Rolls();
 
                 foreach (Coordinate coordinate in engagements)
                 {
                     Console.WriteLine("Engagement at {0},{1}", coordinate.x, coordinate.y);
+                    roll.rollForEngagement(coordinate, thisMatch);
                 }
 
-                //Resolve encounters
                 Console.WriteLine("!-----New Turn------!");
 
                 gameBoard.drawBoard(thisMatch);
             }
-
-
-
-            //Console.WriteLine("new position for {0}: {1},{2}", playerToTakeOrder.name, playerToTakeOrder.position.x, playerToTakeOrder.position.y);
-            Rolls roll = new Rolls();
-
-            roll.rollForEngagement(new Coordinate(1, 1), thisMatch);
-
-            
-            
-      
         }
-
-        
-
-
     }
 }

@@ -72,10 +72,10 @@ namespace UnitTests
 
 
         [Theory]
-        [InlineData(6,6, "its a tie")]
-        [InlineData(6, 1, "The greeks is the winner")]
-        [InlineData(1, 3, "Olsen banden is the winner")]
-        public void findWinnerTest(int a, int b, string expectedResult)
+        [InlineData(6,6, Rolls.resultOfEngagement.Tie)]
+        [InlineData(6, 1, Rolls.resultOfEngagement.homeTeam)]
+        [InlineData(1, 3, Rolls.resultOfEngagement.awayTeam)]
+        public void findWinnerTest(int a, int b, Rolls.resultOfEngagement expectedResult)
         {
             Rolls roll = new Rolls();
 
@@ -88,9 +88,6 @@ namespace UnitTests
             //ASSERT
             Assert.Equal(expectedResult, result);
         }
-
-
-        //TO DO - write move tests
 
         [Theory]
         [InlineData(BasicActions.Actions.up, 1, 0)]
