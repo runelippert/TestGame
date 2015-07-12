@@ -8,14 +8,6 @@ namespace Classes
 {
     public class Rolls
     {
-        public int rollD6()
-        {
-                Random rnd = new Random();
-
-                int result = rnd.Next(1, 7);
-
-                return result;
-        }
 
         public enum resultOfEngagement
         {
@@ -24,16 +16,16 @@ namespace Classes
             Tie
         }
 
-        public resultOfEngagement findWinner(Team one, int rollOne, Team two, int rollTwo)
+        public resultOfEngagement findWinner(Match match, int homeTeamRoll, int awayTeamRoll)
         {
-            if (rollOne > rollTwo)
+            if (homeTeamRoll > awayTeamRoll)
             {
-                Console.WriteLine(one.TeamName + " is the winner");
+                Console.WriteLine(match.homeTeam.TeamName + " is the winner");
                 return resultOfEngagement.homeTeam;
             }
-            else if (rollOne < rollTwo)
+            else if (homeTeamRoll < awayTeamRoll)
             {
-                Console.WriteLine(two.TeamName + " is the winner");
+                Console.WriteLine(match.awayTeam.TeamName + " is the winner");
                 return resultOfEngagement.awayTeam;
             }
             else
@@ -69,22 +61,22 @@ namespace Classes
             Console.WriteLine(match.awayTeam.TeamName + " has " + olsenPlayerAtCoordinate.Count + " players at coordinate 2,2");
 
             //roll for greek players at coordinate
-            Rolls roll = new Rolls();
+            Random rnd = new Random();
 
-            int rollGreek = roll.rollD6();
-            int rollOlsen = roll.rollD6();
+            int rollHome = rnd.Next(1, 7);
+            int rollAway = rnd.Next(1, 7);
 
-            Console.WriteLine(match.homeTeam.TeamName + " rolls " + roll.rollD6());
-            Console.WriteLine(match.awayTeam.TeamName + " rolls " + roll.rollD6());
+            Console.WriteLine(match.homeTeam.TeamName + " rolls " + rollHome);
+            Console.WriteLine(match.awayTeam.TeamName + " rolls " + rollAway);
 
             //+2 til roll pr. player at coordinate.
-            int modifiedGreekRoll = rollGreek + greekPlayersAtCoordinate.Count * 2;
-            int modifiedOlsenRoll = rollOlsen + olsenPlayerAtCoordinate.Count * 2;
+            int modifiedGreekRoll = rollHome + greekPlayersAtCoordinate.Count * 2;
+            int modifiedOlsenRoll = rollAway + olsenPlayerAtCoordinate.Count * 2;
 
             Console.WriteLine("greek modified roll is" + modifiedGreekRoll);
             Console.WriteLine("Olsen modified roll is" + modifiedOlsenRoll);
 
-            resultOfEngagement result = roll.findWinner(match.homeTeam, modifiedGreekRoll, match.awayTeam, modifiedOlsenRoll);
+            resultOfEngagement result = findWinner(match, modifiedGreekRoll, modifiedOlsenRoll);
 
             Console.WriteLine(result.ToString());
 

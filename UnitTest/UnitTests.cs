@@ -78,12 +78,14 @@ namespace UnitTests
         public void findWinnerTest(int a, int b, Rolls.resultOfEngagement expectedResult)
         {
             Rolls roll = new Rolls();
-
-            Team firsteTeam = new Team() { TeamName = "The greeks" };
-            Team secondTeam = new Team() { TeamName = "Olsen banden" };
+            Match match = new Match
+            {
+                homeTeam = new Team() { TeamName = "The greeks" },
+                awayTeam = new Team() { TeamName = "Olsen banden" }
+            };
 
            //ACT
-            var result = roll.findWinner(firsteTeam, a, secondTeam, b);
+            var result = roll.findWinner(match, a, b);
 
             //ASSERT
             Assert.Equal(expectedResult, result);
