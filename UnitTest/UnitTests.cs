@@ -218,5 +218,35 @@ namespace UnitTests
             Assert.Equal(2, result.Count);
         }
 
+        //TO DO write effect of engagement test
+        [Theory]
+        [InlineData(Rolls.resultOfEngagement.homeTeam, "Olsen banden")]
+        [InlineData(Rolls.resultOfEngagement.awayTeam, "The greeks")]
+        public void effectOfEngagementTest(Rolls.resultOfEngagement engagementResult, string loserTeam)
+        {
+            //Arrange
+            Team firsteTeam = new Team() { TeamName = "The greeks" };
+            Team secondTeam = new Team() { TeamName = "Olsen banden" };
+
+            //Setup players at an engagement
+            Rolls roll = new Rolls();
+            List<Player> homeTeamPlayersAtCoordinate = new List<Player>();
+            List<Player> awayTeamPlayersAtCoordinate = new List<Player>();
+
+            homeTeamPlayersAtCoordinate.Add(new Player() { name="Aplha", state = Player.playerState.up, team = firsteTeam});
+            homeTeamPlayersAtCoordinate.Add(new Player() { name="Beta", state = Player.playerState.up, team = firsteTeam});
+            awayTeamPlayersAtCoordinate.Add(new Player() { name = "Ringo", state = Player.playerState.up, team = secondTeam});
+            awayTeamPlayersAtCoordinate.Add(new Player() { name = "John", state = Player.playerState.up, team = secondTeam});
+
+            //Act          
+            var result = roll.effectOfEngangement(engagementResult, homeTeamPlayersAtCoordinate, awayTeamPlayersAtCoordinate);
+
+            //Assert
+            Assert.Equal(Player.playerState.down, result.state);
+            Assert.Equal(loserTeam, result.team.TeamName);
+        }
+
+
+
     }
 }

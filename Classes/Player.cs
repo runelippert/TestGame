@@ -13,7 +13,15 @@ namespace Classes
         public Coordinate position { get; set; }
         public Team team { get; set; }
         public BasicActions action { get; set; }
+        public playerState state { get; set; }
 
+        
+        public enum playerState
+        {
+            up,
+            down
+        }
+        
         public void giveOrders(Match match)
         {
             //Give players orders
