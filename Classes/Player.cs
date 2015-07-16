@@ -8,33 +8,33 @@ namespace Classes
 {
     public class Player
     {
-        public int shirtNumber { get; set; }
-        public string name { get; set; }
-        public Coordinate position { get; set; }
-        public Team team { get; set; }
-        public BasicActions action { get; set; }
-        public playerState state { get; set; }
+        public int ShirtNumber { get; set; }
+        public string Name { get; set; }
+        public Coordinate Position { get; set; }
+        public Team Team { get; set; }
+        public BasicActions Action { get; set; }
+        public PlayerState State { get; set; }
 
         
-        public enum playerState
+        public enum PlayerState
         {
-            up,
-            down
+            Up,
+            Down
         }
         
-        public void giveOrders(Match match)
+        public void GiveOrders(Match match)
         {
             //Give players orders
-            //try to do a foreach in players in match to give them orders
-            foreach (Player player in match.playersInMatch(match))
+            //foreach players in match to give them orders
+            foreach (Player player in match.PlayersInMatch(match))
             {
-                Console.WriteLine("{0} spiller for {1} med nummer {2}", player.name, player.team.TeamName, player.shirtNumber);
-                Console.WriteLine("Give order to {0}", player.name);
+                Console.WriteLine("{0} spiller for {1} med nummer {2}", player.Name, player.Team.TeamName, player.ShirtNumber);
+                Console.WriteLine("Give order to {0}", player.Name);
 
                 //Get Direction
 
 
-                Console.WriteLine("Hit arrowkey for direction to move or space to protect for {0}: ", player.name);
+                Console.WriteLine("Hit arrowkey for direction to move or space to protect for {0}: ", player.Name);
                 var action = new BasicActions();
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
@@ -44,40 +44,37 @@ namespace Classes
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        action.action = BasicActions.Actions.up;
+                        action.Action = BasicActions.Actions.Up;
                         break;
                     case ConsoleKey.DownArrow:
-                        action.action = BasicActions.Actions.down;
+                        action.Action = BasicActions.Actions.Down;
                         break;
                     case ConsoleKey.LeftArrow:
-                        action.action = BasicActions.Actions.left;
+                        action.Action = BasicActions.Actions.Left;
                         break;
                     case ConsoleKey.RightArrow:
-                        action.action = BasicActions.Actions.rigth;
+                        action.Action = BasicActions.Actions.Rigth;
                         break;
                     case ConsoleKey.Spacebar:
-                        action.action = BasicActions.Actions.protect;
+                        action.Action = BasicActions.Actions.Protect;
                         break;
                 }
                 //}
 
                 //Assign player Order
-                player.action = action;
+                player.Action = action;
 
-                Console.WriteLine(player.name + " has the action " + player.action.action);
+                Console.WriteLine(player.Name + " has the action " + player.Action.Action);
                 Console.WriteLine("----------------------------");
-
-
-
             }
 
     }
 
-        public void executeOrders(Match match)
+        public void ExecuteOrders(Match match)
         {
-            foreach (Player player in match.playersInMatch(match))
+            foreach (Player player in match.PlayersInMatch(match))
             {
-                BasicActions.takeAction(player, player.action.action);
+                BasicActions.TakeAction(player, player.Action.Action);
             }
         }
     

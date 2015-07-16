@@ -9,51 +9,51 @@ namespace Classes
     public class Rolls
     {
 
-        public enum resultOfEngagement
+        public enum ResultOfEngagement
         {
-            homeTeam,
-            awayTeam,
+            HomeTeam,
+            AwayTeam,
             Tie
         }
 
-        public resultOfEngagement findWinner(Match match, int homeTeamRoll, int awayTeamRoll)
+        public ResultOfEngagement FindWinner(Match match, int homeTeamRoll, int awayTeamRoll)
         {
             if (homeTeamRoll > awayTeamRoll)
             {
-                Console.WriteLine(match.homeTeam.TeamName + " is the winner");
-                return resultOfEngagement.homeTeam;
+                Console.WriteLine(match.HomeTeam.TeamName + " is the winner");
+                return ResultOfEngagement.HomeTeam;
             }
             else if (homeTeamRoll < awayTeamRoll)
             {
-                Console.WriteLine(match.awayTeam.TeamName + " is the winner");
-                return resultOfEngagement.awayTeam;
+                Console.WriteLine(match.AwayTeam.TeamName + " is the winner");
+                return ResultOfEngagement.AwayTeam;
             }
             else
             {
                 Console.WriteLine("its a tie");
-                return resultOfEngagement.Tie;
+                return ResultOfEngagement.Tie;
             }
 
         }
 
-        public Player effectOfEngangement(resultOfEngagement result, List<Player> homeTeamPlayersAtCoordinate, List<Player> awayTeamPlayersAtCoordinate)
+        public Player EffectOfEngangement(ResultOfEngagement result, List<Player> homeTeamPlayersAtCoordinate, List<Player> awayTeamPlayersAtCoordinate)
         {
             Random rnd = new Random();
 
-            if (result == resultOfEngagement.homeTeam)
+            if (result == ResultOfEngagement.HomeTeam)
             {
                 //Select a random player from away team and set to downed.
-                var NumberOfawayPlayersAtCoordinate = awayTeamPlayersAtCoordinate.Count;
-                int selectRandomPlayer = rnd.Next(0, NumberOfawayPlayersAtCoordinate); //rnd.next max is 1 lower then the number writen.
+                var numberOfawayPlayersAtCoordinate = awayTeamPlayersAtCoordinate.Count;
+                int selectRandomPlayer = rnd.Next(0, numberOfawayPlayersAtCoordinate); //rnd.next max is 1 lower then the number writen.
 
                 //select Player to take effekt
                 var player = awayTeamPlayersAtCoordinate[selectRandomPlayer];
                 
                 //Set player to downed
-                player.state = Player.playerState.down;
+                player.State = Player.PlayerState.Down;
 
-                Console.WriteLine("{0} is {1} from the team {2}", player.name,
-                    player.state, player.team.TeamName);
+                Console.WriteLine("{0} is {1} from the team {2}", player.Name,
+                    player.State, player.Team.TeamName);
 
                 return player;
             }
@@ -61,17 +61,17 @@ namespace Classes
             else
             {
                 //Select a random player from home team and set to downed.
-                var NumberOfhomePlayersAtCoordinate = homeTeamPlayersAtCoordinate.Count;
-                int selectRandomPlayer = rnd.Next(0, NumberOfhomePlayersAtCoordinate);
+                var numberOfhomePlayersAtCoordinate = homeTeamPlayersAtCoordinate.Count;
+                int selectRandomPlayer = rnd.Next(0, numberOfhomePlayersAtCoordinate);
 
                 //select Player to take effekt
                 var player = homeTeamPlayersAtCoordinate[selectRandomPlayer];
 
                 //Set player to downed
-                player.state = Player.playerState.down;
+                player.State = Player.PlayerState.Down;
 
-                Console.WriteLine("{0} is {1} from the team {2}", player.name,
-                    player.state, player.team.TeamName);
+                Console.WriteLine("{0} is {1} from the team {2}", player.Name,
+                    player.State, player.Team.TeamName);
 
                 return player;
             }
@@ -81,14 +81,14 @@ namespace Classes
         /// Finds number of players for each team at a coordinate at rolls to find a winner
         /// 
         /// </summary>
-        public void rollForEngagement(Coordinate coordinate, Match match)
+        public void RollForEngagement(Coordinate coordinate, Match match)
         {
             List<Player> homePlayersAtCoordinate = new List<Player>();
             List<Player> awayPlayerAtCoordinate = new List<Player>();
 
-            foreach (Player somePlayer in match.getPlayersAtCoordinate(coordinate, match))
+            foreach (Player somePlayer in match.GetPlayersAtCoordinate(coordinate, match))
             {
-                if (somePlayer.team.TeamName == match.homeTeam.TeamName)
+                if (somePlayer.Team.TeamName == match.HomeTeam.TeamName)
                 {
                     homePlayersAtCoordinate.Add(somePlayer);
                 }
@@ -98,8 +98,8 @@ namespace Classes
                 }
             }
 
-            Console.WriteLine(match.homeTeam.TeamName + " has " + homePlayersAtCoordinate.Count + " players at coordinate 2,2");
-            Console.WriteLine(match.awayTeam.TeamName + " has " + awayPlayerAtCoordinate.Count + " players at coordinate 2,2");
+            Console.WriteLine(match.HomeTeam.TeamName + " has " + homePlayersAtCoordinate.Count + " players at coordinate 2,2");
+            Console.WriteLine(match.AwayTeam.TeamName + " has " + awayPlayerAtCoordinate.Count + " players at coordinate 2,2");
 
             //roll for greek players at coordinate
             Random rnd = new Random();
@@ -107,8 +107,8 @@ namespace Classes
             int rollHome = rnd.Next(1, 7);
             int rollAway = rnd.Next(1, 7);
 
-            Console.WriteLine(match.homeTeam.TeamName + " rolls " + rollHome);
-            Console.WriteLine(match.awayTeam.TeamName + " rolls " + rollAway);
+            Console.WriteLine(match.HomeTeam.TeamName + " rolls " + rollHome);
+            Console.WriteLine(match.AwayTeam.TeamName + " rolls " + rollAway);
 
             //+2 til roll pr. player at coordinate.
             int modifiedGreekRoll = rollHome + homePlayersAtCoordinate.Count * 2;
@@ -117,12 +117,12 @@ namespace Classes
             Console.WriteLine("greek modified roll is" + modifiedGreekRoll);
             Console.WriteLine("Olsen modified roll is" + modifiedOlsenRoll);
 
-            resultOfEngagement engagementResult = findWinner(match, modifiedGreekRoll, modifiedOlsenRoll);
+            ResultOfEngagement engagementResult = FindWinner(match, modifiedGreekRoll, modifiedOlsenRoll);
 
             //add effect (down player, equals half a player next round and can't move.
-            if (engagementResult != resultOfEngagement.Tie)
+            if (engagementResult != ResultOfEngagement.Tie)
             {
-                effectOfEngangement(engagementResult, homePlayersAtCoordinate, awayPlayerAtCoordinate);
+                EffectOfEngangement(engagementResult, homePlayersAtCoordinate, awayPlayerAtCoordinate);
             }
             else
             {

@@ -9,20 +9,20 @@ namespace Classes
     public class Match
     {
             //definition of home Team and away team
-            public Team homeTeam { get; set; }
+            public Team HomeTeam { get; set; }
 
-            public Team awayTeam { get; set; }
+            public Team AwayTeam { get; set; }
 
-            public List<Player> playersInMatch(Match match)
+            public List<Player> PlayersInMatch(Match match)
             {
                 List<Player> playersInMatch = new List<Player>();
 
-                foreach (Player x in match.homeTeam.playersOnTeam)
+                foreach (Player x in match.HomeTeam.PlayersOnTeam)
                 {
                     playersInMatch.Add(x);
                 }
 
-                foreach (Player x in match.awayTeam.playersOnTeam)
+                foreach (Player x in match.AwayTeam.PlayersOnTeam)
                 {
                     playersInMatch.Add(x);
                 }
@@ -30,15 +30,15 @@ namespace Classes
                 return playersInMatch;
             }
 
-            public List<Player> getPlayersAtCoordinate(Coordinate coordinate, Match match)
+            public List<Player> GetPlayersAtCoordinate(Coordinate coordinate, Match match)
             {
                 List<Player> playersAtCoordinate = new List<Player> { };
 
                 //Check all players coordinate
-                foreach (Player somePlayer in match.playersInMatch(match))
+                foreach (Player somePlayer in match.PlayersInMatch(match))
                 {
-                    if (somePlayer.position.x == coordinate.x)
-                        if (somePlayer.position.y == coordinate.y)
+                    if (somePlayer.Position.X == coordinate.X)
+                        if (somePlayer.Position.Y == coordinate.Y)
                         {
                             playersAtCoordinate.Add(somePlayer);
                         }
@@ -47,58 +47,58 @@ namespace Classes
                 return playersAtCoordinate;
             }
 
-            public Match setupMatch()
+            public Match SetupMatch()
             {
                 Team homeTeam = new Team() { TeamName = "The greeks" };
                 Team awayTeam = new Team() { TeamName = "Olsen banden" };
 
                 Match thisMatch = new Match()
                 {
-                    homeTeam = homeTeam,
-                    awayTeam = awayTeam
+                    HomeTeam = homeTeam,
+                    AwayTeam = awayTeam
                 };
 
                 Player players = new Player();
 
-                homeTeam.playersOnTeam.Add(new Player() { shirtNumber = 1, name = "Alpha", position = new Coordinate(2, 1), team = homeTeam });
-                homeTeam.playersOnTeam.Add(new Player() { shirtNumber = 2, name = "Beta", position = new Coordinate(1, 2), team = homeTeam });
-                awayTeam.playersOnTeam.Add(new Player() { shirtNumber = 10, name = "Egon", position = new Coordinate(1, 1), team = awayTeam });
-                awayTeam.playersOnTeam.Add(new Player() { shirtNumber = 11, name = "Benny", position = new Coordinate(2, 2), team = awayTeam });
+                homeTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 1, Name = "Alpha", Position = new Coordinate(2, 1), Team = homeTeam });
+                homeTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 2, Name = "Beta", Position = new Coordinate(1, 2), Team = homeTeam });
+                awayTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 10, Name = "Egon", Position = new Coordinate(1, 1), Team = awayTeam });
+                awayTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 11, Name = "Benny", Position = new Coordinate(2, 2), Team = awayTeam });
 
                 Console.WriteLine("--PRESENTING THE HOME TEAM: {0}", homeTeam.TeamName);
-                foreach (Player player in homeTeam.playersOnTeam)
+                foreach (Player player in homeTeam.PlayersOnTeam)
                 {
-                    Console.WriteLine("For {0} first player is #{1} {2}", homeTeam.TeamName, player.shirtNumber, player.name);
+                    Console.WriteLine("For {0} first player is #{1} {2}", homeTeam.TeamName, player.ShirtNumber, player.Name);
                 }
 
                 Console.WriteLine("--PRESENTING THE AWAY TEAM: {0}", awayTeam.TeamName);
 
-                foreach(Player player in awayTeam.playersOnTeam)
+                foreach(Player player in awayTeam.PlayersOnTeam)
                 {
-                    Console.WriteLine("For {0} first player is #{1} {2}", awayTeam.TeamName, player.shirtNumber, player.name);
+                    Console.WriteLine("For {0} first player is #{1} {2}", awayTeam.TeamName, player.ShirtNumber, player.Name);
 
                 }
                 
                 return thisMatch;
             }
 
-        public List<Coordinate> getAllCordinatesWithPlayersFromBothTeams(Match match)
+        public List<Coordinate> GetAllCordinatesWithPlayersFromBothTeams(Match match)
         {
             Board board = new Board();
 
             List<Coordinate> result = new List<Coordinate>();
 
             //Runs through all coordinates on the board
-            foreach (Coordinate coordinate in board.boardCordinates())
+            foreach (Coordinate coordinate in board.BoardCordinates())
             {
-                List<Player> players = getPlayersAtCoordinate(coordinate, match);
+                List<Player> players = GetPlayersAtCoordinate(coordinate, match);
 
                 //Runs through all players at a coordinate to get team
                 foreach(Player player in players)
                 {
                     List<Team> homeTeamPlayer = new List<Team>();
 
-                    if (player.team == match.homeTeam)
+                    if (player.Team == match.HomeTeam)
                     {
 
                     }
@@ -124,21 +124,21 @@ namespace Classes
         //GetPlayers on AwayTeam
         //Add positon to a list of coordinates that has players from away team.
         //Compaire the 2 lists to find coordinates with conflicts 
-        public List<Coordinate> compairePlayersCoordinates(Match match)
+        public List<Coordinate> CompairePlayersCoordinates(Match match)
         {
             List<Coordinate> result = new List<Coordinate>();
 
             List<Coordinate> homeTeamCoordinates = new List<Coordinate>();
             List<Coordinate> awayTeamCoordinates = new List<Coordinate>();
 
-            foreach(Player player in match.homeTeam.playersOnTeam)
+            foreach(Player player in match.HomeTeam.PlayersOnTeam)
             {
-                homeTeamCoordinates.Add(player.position);
+                homeTeamCoordinates.Add(player.Position);
             }
 
-            foreach(Player player in match.awayTeam.playersOnTeam)
+            foreach(Player player in match.AwayTeam.PlayersOnTeam)
             {
-                awayTeamCoordinates.Add(player.position);
+                awayTeamCoordinates.Add(player.Position);
             }
 
             //Compaire list

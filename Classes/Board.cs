@@ -8,88 +8,88 @@ namespace Classes
 {
     public class Board
     {
-        public void drawBoard(Match match)
+        public void DrawBoard(Match match)
         {
-            foreach (Coordinate coordinate in boardCordinates())
+            foreach (Coordinate coordinate in BoardCordinates())
             {
 
-                List<Player> playersAtCoordinate = match.getPlayersAtCoordinate(coordinate, match);
+                List<Player> playersAtCoordinate = match.GetPlayersAtCoordinate(coordinate, match);
 
-                if (coordinate.y == 0)
+                if (coordinate.Y == 0)
                 {
-                    drawRow(coordinate.y, match, playersAtCoordinate, coordinate);
+                    DrawRow(coordinate.Y, match, playersAtCoordinate, coordinate);
                 }
-                if (coordinate.y == 0 && coordinate.x == 2)
-                {
-                    Console.Write("|");
-                    Console.WriteLine("");
-                    Console.WriteLine("---------------------");
-                }
-                if (coordinate.y == 1)
-                {
-                    drawRow(coordinate.y, match, playersAtCoordinate, coordinate);
-                }
-                if (coordinate.y == 1 && coordinate.x == 2)
+                if (coordinate.Y == 0 && coordinate.X == 2)
                 {
                     Console.Write("|");
                     Console.WriteLine("");
                     Console.WriteLine("---------------------");
                 }
-                if (coordinate.y == 2)
+                if (coordinate.Y == 1)
                 {
-                    drawRow(coordinate.y, match, playersAtCoordinate, coordinate);
+                    DrawRow(coordinate.Y, match, playersAtCoordinate, coordinate);
                 }
-                if (coordinate.y == 2 && coordinate.x == 2)
-                {
-                    Console.Write("|");
-                    Console.WriteLine("");
-                    Console.WriteLine("---------------------");
-                }
-                if (coordinate.y == 3)
-                {
-                    drawRow(coordinate.y, match, playersAtCoordinate, coordinate);
-                }
-                if (coordinate.y == 3 && coordinate.x == 2)
+                if (coordinate.Y == 1 && coordinate.X == 2)
                 {
                     Console.Write("|");
                     Console.WriteLine("");
                     Console.WriteLine("---------------------");
                 }
-                if (coordinate.y == 4)
+                if (coordinate.Y == 2)
                 {
-                    drawRow(coordinate.y, match, playersAtCoordinate, coordinate);
+                    DrawRow(coordinate.Y, match, playersAtCoordinate, coordinate);
                 }
-                if (coordinate.y == 4 && coordinate.x == 2)
-                {
-                    Console.Write("|");
-                    Console.WriteLine("");
-                    Console.WriteLine("---------------------");
-                }
-                if (coordinate.y == 5)
-                {
-                    drawRow(coordinate.y, match, playersAtCoordinate, coordinate);
-                }
-                if (coordinate.y == 5 && coordinate.x == 2)
+                if (coordinate.Y == 2 && coordinate.X == 2)
                 {
                     Console.Write("|");
                     Console.WriteLine("");
                     Console.WriteLine("---------------------");
                 }
-                if (coordinate.y == 6)
+                if (coordinate.Y == 3)
                 {
-                    drawRow(coordinate.y, match, playersAtCoordinate, coordinate);
+                    DrawRow(coordinate.Y, match, playersAtCoordinate, coordinate);
                 }
-                if (coordinate.y == 6 && coordinate.x == 2)
+                if (coordinate.Y == 3 && coordinate.X == 2)
                 {
                     Console.Write("|");
                     Console.WriteLine("");
                     Console.WriteLine("---------------------");
                 }
-                if (coordinate.y == 7)
+                if (coordinate.Y == 4)
                 {
-                    drawRow(coordinate.y, match, playersAtCoordinate, coordinate);
+                    DrawRow(coordinate.Y, match, playersAtCoordinate, coordinate);
                 }
-                if (coordinate.y == 7 && coordinate.x == 2)
+                if (coordinate.Y == 4 && coordinate.X == 2)
+                {
+                    Console.Write("|");
+                    Console.WriteLine("");
+                    Console.WriteLine("---------------------");
+                }
+                if (coordinate.Y == 5)
+                {
+                    DrawRow(coordinate.Y, match, playersAtCoordinate, coordinate);
+                }
+                if (coordinate.Y == 5 && coordinate.X == 2)
+                {
+                    Console.Write("|");
+                    Console.WriteLine("");
+                    Console.WriteLine("---------------------");
+                }
+                if (coordinate.Y == 6)
+                {
+                    DrawRow(coordinate.Y, match, playersAtCoordinate, coordinate);
+                }
+                if (coordinate.Y == 6 && coordinate.X == 2)
+                {
+                    Console.Write("|");
+                    Console.WriteLine("");
+                    Console.WriteLine("---------------------");
+                }
+                if (coordinate.Y == 7)
+                {
+                    DrawRow(coordinate.Y, match, playersAtCoordinate, coordinate);
+                }
+                if (coordinate.Y == 7 && coordinate.X == 2)
                 {
                     Console.Write("|");
                     Console.WriteLine("");
@@ -99,21 +99,21 @@ namespace Classes
             
         }
 
-        void drawRow(int y, Match match, List<Player> playersAtCoordinate, Coordinate coordinate)
+        void DrawRow(int y, Match match, List<Player> playersAtCoordinate, Coordinate coordinate)
         {
             Console.Write("|");
             if (playersAtCoordinate.Count > 0)
             {
-                foreach (var x in match.getPlayersAtCoordinate(coordinate, match))
+                foreach (var x in match.GetPlayersAtCoordinate(coordinate, match))
                 {
-                    Console.Write(x.name + " ");
+                    Console.Write(x.Name + " ");
                 }
             }
-            Console.Write("{0},{1}", coordinate.x, coordinate.y);
+            Console.Write("{0},{1}", coordinate.X, coordinate.Y);
         }
 
 
-        public List<Coordinate> boardCordinates()
+        public List<Coordinate> BoardCordinates()
         {
             List<Coordinate> boardCordinates = new List<Coordinate>();
                         
@@ -134,11 +134,11 @@ namespace Classes
     {
         public Coordinate(int _x, int _y)
         {
-            x = _x;
-            y = _y;
+            X = _x;
+            Y = _y;
         }
-        public int x { get; set; }
-        public int y { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -147,7 +147,7 @@ namespace Classes
                 return false;
             }
             Coordinate coordinate = (Coordinate)obj;
-            return ((coordinate.x == this.x) && (coordinate.y == this.y));
+            return ((coordinate.X == this.X) && (coordinate.Y == this.Y));
         }
 
     }

@@ -15,28 +15,28 @@ namespace UnitTests
 
             Match thisMatch = new Match()
             {
-                homeTeam = firsteTeam,
-                awayTeam = secondTeam
+                HomeTeam = firsteTeam,
+                AwayTeam = secondTeam
             };
 
-            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 1, name = "Alpha", position = new Coordinate(2, 1), team = firsteTeam });
-            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 2, name = "Beta", position = new Coordinate(1, 1), team = firsteTeam });
-            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 10, name = "Egon", position = new Coordinate(1, 1), team = secondTeam });
-            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 11, name = "Benny", position = new Coordinate(1, 1), team = secondTeam });
+            firsteTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 1, Name = "Alpha", Position = new Coordinate(2, 1), Team = firsteTeam });
+            firsteTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 2, Name = "Beta", Position = new Coordinate(1, 1), Team = firsteTeam });
+            secondTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 10, Name = "Egon", Position = new Coordinate(1, 1), Team = secondTeam });
+            secondTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 11, Name = "Benny", Position = new Coordinate(1, 1), Team = secondTeam });
 
 
             //Act
-            var playersToFind = thisMatch.getPlayersAtCoordinate(new Coordinate(1, 1), thisMatch);
+            var playersToFind = thisMatch.GetPlayersAtCoordinate(new Coordinate(1, 1), thisMatch);
             
             //Assert
             Assert.NotEmpty(playersToFind);
             Assert.Equal(3, playersToFind.Count);
-            Assert.Equal("Beta", playersToFind[0].name);
-            Assert.Equal("The greeks", playersToFind[0].team.TeamName);
-            Assert.Equal("Egon", playersToFind[1].name);
-            Assert.Equal("Olsen banden", playersToFind[1].team.TeamName);
-            Assert.Equal("Benny", playersToFind[2].name);
-            Assert.Equal("Olsen banden", playersToFind[2].team.TeamName);
+            Assert.Equal("Beta", playersToFind[0].Name);
+            Assert.Equal("The greeks", playersToFind[0].Team.TeamName);
+            Assert.Equal("Egon", playersToFind[1].Name);
+            Assert.Equal("Olsen banden", playersToFind[1].Team.TeamName);
+            Assert.Equal("Benny", playersToFind[2].Name);
+            Assert.Equal("Olsen banden", playersToFind[2].Team.TeamName);
 
 
 
@@ -52,18 +52,18 @@ namespace UnitTests
 
             Match thisMatch = new Match()
             {
-                homeTeam = firsteTeam,
-                awayTeam = secondTeam
+                HomeTeam = firsteTeam,
+                AwayTeam = secondTeam
             };
 
-            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 1, name = "Alpha", position = new Coordinate(2, 1), team = firsteTeam });
-            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 2, name = "Beta", position = new Coordinate(1, 1), team = firsteTeam });
-            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 10, name = "Egon", position = new Coordinate(1, 1), team = secondTeam });
-            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 11, name = "Benny", position = new Coordinate(1, 1), team = secondTeam });
+            firsteTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 1, Name = "Alpha", Position = new Coordinate(2, 1), Team = firsteTeam });
+            firsteTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 2, Name = "Beta", Position = new Coordinate(1, 1), Team = firsteTeam });
+            secondTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 10, Name = "Egon", Position = new Coordinate(1, 1), Team = secondTeam });
+            secondTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 11, Name = "Benny", Position = new Coordinate(1, 1), Team = secondTeam });
 
             //Act
             Rolls roll = new Rolls();
-            roll.rollForEngagement(new Coordinate(1, 1), thisMatch);
+            roll.RollForEngagement(new Coordinate(1, 1), thisMatch);
 
             //Assert
             //TO DO roll for engagement needs to be updated to return a value or a string. 
@@ -72,42 +72,42 @@ namespace UnitTests
 
 
         [Theory]
-        [InlineData(6,6, Rolls.resultOfEngagement.Tie)]
-        [InlineData(6, 1, Rolls.resultOfEngagement.homeTeam)]
-        [InlineData(1, 3, Rolls.resultOfEngagement.awayTeam)]
-        public void findWinnerTest(int a, int b, Rolls.resultOfEngagement expectedResult)
+        [InlineData(6,6, Rolls.ResultOfEngagement.Tie)]
+        [InlineData(6, 1, Rolls.ResultOfEngagement.HomeTeam)]
+        [InlineData(1, 3, Rolls.ResultOfEngagement.AwayTeam)]
+        public void findWinnerTest(int a, int b, Rolls.ResultOfEngagement expectedResult)
         {
             Rolls roll = new Rolls();
             Match match = new Match
             {
-                homeTeam = new Team() { TeamName = "The greeks" },
-                awayTeam = new Team() { TeamName = "Olsen banden" }
+                HomeTeam = new Team() { TeamName = "The greeks" },
+                AwayTeam = new Team() { TeamName = "Olsen banden" }
             };
 
            //ACT
-            var result = roll.findWinner(match, a, b);
+            var result = roll.FindWinner(match, a, b);
 
             //ASSERT
             Assert.Equal(expectedResult, result);
         }
 
         [Theory]
-        [InlineData(BasicActions.Actions.up, 1, 0)]
-        [InlineData(BasicActions.Actions.down, 1,2)]
-        [InlineData(BasicActions.Actions.left, 0, 1 )]
-        [InlineData(BasicActions.Actions.rigth, 2, 1)]
-        [InlineData(BasicActions.Actions.protect, 1, 1)]
+        [InlineData(BasicActions.Actions.Up, 1, 0)]
+        [InlineData(BasicActions.Actions.Down, 1,2)]
+        [InlineData(BasicActions.Actions.Left, 0, 1 )]
+        [InlineData(BasicActions.Actions.Rigth, 2, 1)]
+        [InlineData(BasicActions.Actions.Protect, 1, 1)]
         public void takeActionTest(BasicActions.Actions action, int end_x, int end_y )
         {
             //Arrange
-            Player alfred = new Player(){ name="Alfred", position=new Coordinate(1,1)};
+            Player alfred = new Player(){ Name="Alfred", Position=new Coordinate(1,1)};
 
             //act
-            BasicActions.takeAction(alfred, action);
+            BasicActions.TakeAction(alfred, action);
 
             //Assert
-            Assert.Equal(end_x, alfred.position.x);
-            Assert.Equal(end_y, alfred.position.y);
+            Assert.Equal(end_x, alfred.Position.X);
+            Assert.Equal(end_y, alfred.Position.Y);
         }
 
 
@@ -120,18 +120,18 @@ namespace UnitTests
 
             Match thisMatch = new Match()
             {
-                homeTeam = firsteTeam,
-                awayTeam = secondTeam
+                HomeTeam = firsteTeam,
+                AwayTeam = secondTeam
             };
 
-            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 1, name = "Alpha", position = new Coordinate(1, 1), team = firsteTeam });
-            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 2, name = "Beta", position = new Coordinate(2, 2), team = firsteTeam });
-            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 10, name = "Egon", position = new Coordinate(3, 3), team = secondTeam });
-            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 11, name = "Benny", position = new Coordinate(4, 4), team = secondTeam });
+            firsteTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 1, Name = "Alpha", Position = new Coordinate(1, 1), Team = firsteTeam });
+            firsteTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 2, Name = "Beta", Position = new Coordinate(2, 2), Team = firsteTeam });
+            secondTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 10, Name = "Egon", Position = new Coordinate(3, 3), Team = secondTeam });
+            secondTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 11, Name = "Benny", Position = new Coordinate(4, 4), Team = secondTeam });
 
 
             //Act
-            List<Coordinate> result = thisMatch.compairePlayersCoordinates(thisMatch);
+            List<Coordinate> result = thisMatch.CompairePlayersCoordinates(thisMatch);
 
             //Assert
             Assert.Equal(0, result.Count);
@@ -146,18 +146,18 @@ namespace UnitTests
 
             Match thisMatch = new Match()
             {
-                homeTeam = firsteTeam,
-                awayTeam = secondTeam
+                HomeTeam = firsteTeam,
+                AwayTeam = secondTeam
             };
 
-            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 1, name = "Alpha", position = new Coordinate(1, 2), team = firsteTeam });
-            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 2, name = "Beta", position = new Coordinate(1, 2), team = firsteTeam });
-            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 10, name = "Egon", position = new Coordinate(3, 3), team = secondTeam });
-            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 11, name = "Benny", position = new Coordinate(4, 4), team = secondTeam });
+            firsteTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 1, Name = "Alpha", Position = new Coordinate(1, 2), Team = firsteTeam });
+            firsteTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 2, Name = "Beta", Position = new Coordinate(1, 2), Team = firsteTeam });
+            secondTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 10, Name = "Egon", Position = new Coordinate(3, 3), Team = secondTeam });
+            secondTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 11, Name = "Benny", Position = new Coordinate(4, 4), Team = secondTeam });
 
 
             //Act
-            List<Coordinate> result = thisMatch.compairePlayersCoordinates(thisMatch);
+            List<Coordinate> result = thisMatch.CompairePlayersCoordinates(thisMatch);
 
             //Assert
             Assert.Equal(0, result.Count);
@@ -172,18 +172,18 @@ namespace UnitTests
 
             Match thisMatch = new Match()
             {
-                homeTeam = firsteTeam,
-                awayTeam = secondTeam
+                HomeTeam = firsteTeam,
+                AwayTeam = secondTeam
             };
 
-            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 1, name = "Alpha", position = new Coordinate(1, 1), team = firsteTeam });
-            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 2, name = "Beta", position = new Coordinate(3, 2), team = firsteTeam });
-            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 10, name = "Egon", position = new Coordinate(3, 2), team = secondTeam });
-            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 11, name = "Benny", position = new Coordinate(3, 2), team = secondTeam });
+            firsteTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 1, Name = "Alpha", Position = new Coordinate(1, 1), Team = firsteTeam });
+            firsteTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 2, Name = "Beta", Position = new Coordinate(3, 2), Team = firsteTeam });
+            secondTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 10, Name = "Egon", Position = new Coordinate(3, 2), Team = secondTeam });
+            secondTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 11, Name = "Benny", Position = new Coordinate(3, 2), Team = secondTeam });
 
 
             //Act
-            List<Coordinate> result = thisMatch.compairePlayersCoordinates(thisMatch);
+            List<Coordinate> result = thisMatch.CompairePlayersCoordinates(thisMatch);
 
             //Assert
             Assert.Equal(new Coordinate(3, 2), result[0]);
@@ -199,18 +199,18 @@ namespace UnitTests
 
             Match thisMatch = new Match()
             {
-                homeTeam = firsteTeam,
-                awayTeam = secondTeam
+                HomeTeam = firsteTeam,
+                AwayTeam = secondTeam
             };
 
-            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 1, name = "Alpha", position = new Coordinate(5, 5), team = firsteTeam });
-            firsteTeam.playersOnTeam.Add(new Player() { shirtNumber = 2, name = "Beta", position = new Coordinate(3, 2), team = firsteTeam });
-            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 10, name = "Egon", position = new Coordinate(5, 5), team = secondTeam });
-            secondTeam.playersOnTeam.Add(new Player() { shirtNumber = 11, name = "Benny", position = new Coordinate(3, 2), team = secondTeam });
+            firsteTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 1, Name = "Alpha", Position = new Coordinate(5, 5), Team = firsteTeam });
+            firsteTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 2, Name = "Beta", Position = new Coordinate(3, 2), Team = firsteTeam });
+            secondTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 10, Name = "Egon", Position = new Coordinate(5, 5), Team = secondTeam });
+            secondTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 11, Name = "Benny", Position = new Coordinate(3, 2), Team = secondTeam });
 
 
             //Act
-            List<Coordinate> result = thisMatch.compairePlayersCoordinates(thisMatch);
+            List<Coordinate> result = thisMatch.CompairePlayersCoordinates(thisMatch);
 
             //Assert
             Assert.Equal(new Coordinate(5, 5), result[0]);
@@ -220,9 +220,9 @@ namespace UnitTests
 
         //TO DO write effect of engagement test
         [Theory]
-        [InlineData(Rolls.resultOfEngagement.homeTeam, "Olsen banden")]
-        [InlineData(Rolls.resultOfEngagement.awayTeam, "The greeks")]
-        public void effectOfEngagementTest(Rolls.resultOfEngagement engagementResult, string loserTeam)
+        [InlineData(Rolls.ResultOfEngagement.HomeTeam, "Olsen banden")]
+        [InlineData(Rolls.ResultOfEngagement.AwayTeam, "The greeks")]
+        public void effectOfEngagementTest(Rolls.ResultOfEngagement engagementResult, string loserTeam)
         {
             //Arrange
             Team firsteTeam = new Team() { TeamName = "The greeks" };
@@ -233,17 +233,17 @@ namespace UnitTests
             List<Player> homeTeamPlayersAtCoordinate = new List<Player>();
             List<Player> awayTeamPlayersAtCoordinate = new List<Player>();
 
-            homeTeamPlayersAtCoordinate.Add(new Player() { name="Aplha", state = Player.playerState.up, team = firsteTeam});
-            homeTeamPlayersAtCoordinate.Add(new Player() { name="Beta", state = Player.playerState.up, team = firsteTeam});
-            awayTeamPlayersAtCoordinate.Add(new Player() { name = "Ringo", state = Player.playerState.up, team = secondTeam});
-            awayTeamPlayersAtCoordinate.Add(new Player() { name = "John", state = Player.playerState.up, team = secondTeam});
+            homeTeamPlayersAtCoordinate.Add(new Player() { Name="Aplha", State = Player.PlayerState.Up, Team = firsteTeam});
+            homeTeamPlayersAtCoordinate.Add(new Player() { Name="Beta", State = Player.PlayerState.Up, Team = firsteTeam});
+            awayTeamPlayersAtCoordinate.Add(new Player() { Name = "Ringo", State = Player.PlayerState.Up, Team = secondTeam});
+            awayTeamPlayersAtCoordinate.Add(new Player() { Name = "John", State = Player.PlayerState.Up, Team = secondTeam});
 
             //Act          
-            var result = roll.effectOfEngangement(engagementResult, homeTeamPlayersAtCoordinate, awayTeamPlayersAtCoordinate);
+            var result = roll.EffectOfEngangement(engagementResult, homeTeamPlayersAtCoordinate, awayTeamPlayersAtCoordinate);
 
             //Assert
-            Assert.Equal(Player.playerState.down, result.state);
-            Assert.Equal(loserTeam, result.team.TeamName);
+            Assert.Equal(Player.PlayerState.Down, result.State);
+            Assert.Equal(loserTeam, result.Team.TeamName);
         }
 
 
