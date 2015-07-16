@@ -17,7 +17,7 @@ namespace Classes
     public class Team
     {
         // a list of players 
-        public List<Player> PlayersOnTeam = new List<Player> { };
+        public List<Player> PlayersOnTeam = new List<Player>();
 
         public string TeamName { get; set; }
         

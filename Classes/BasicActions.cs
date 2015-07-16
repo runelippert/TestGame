@@ -23,33 +23,33 @@ namespace Classes
         {
             Coordinate currentPosition = playerToTakeAction.Position;
 
-            BasicActions.Actions moveTo = order;
+            Actions moveTo = order;
 
-            if (order == BasicActions.Actions.Down)
+            if (order == Actions.Down)
             {
                 Console.WriteLine("{0} trying to go down", playerToTakeAction.Name);
                 playerToTakeAction.Position.Y++;
                 return playerToTakeAction.Position;
             }
-            if (order == BasicActions.Actions.Left)
+            if (order == Actions.Left)
             {
                 Console.WriteLine("{0} trying to go left", playerToTakeAction.Name);
                 playerToTakeAction.Position.X--;
                 return playerToTakeAction.Position;
             }
-            if (order == BasicActions.Actions.Rigth)
+            if (order == Actions.Rigth)
             {
                 Console.WriteLine("{0} trying to go rigth", playerToTakeAction.Name);
                 playerToTakeAction.Position.X++;
                 return playerToTakeAction.Position;
             }
-            if (order == BasicActions.Actions.Up)
+            if (order == Actions.Up)
             {
                 Console.WriteLine("{0} trying to go up", playerToTakeAction.Name);
                 playerToTakeAction.Position.Y--;
                 return playerToTakeAction.Position;
             }
-            if (order == BasicActions.Actions.Protect)
+            if (order == Actions.Protect)
             {
                 Console.WriteLine("{0} protecting", playerToTakeAction.Name);
                 return playerToTakeAction.Position;

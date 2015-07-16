@@ -15,17 +15,11 @@ namespace Classes
 
             public List<Player> PlayersInMatch(Match match)
             {
-                List<Player> playersInMatch = new List<Player>();
+                //Add all HomeTeam players to Players In Match List
+                List<Player> playersInMatch = match.HomeTeam.PlayersOnTeam.ToList();
 
-                foreach (Player x in match.HomeTeam.PlayersOnTeam)
-                {
-                    playersInMatch.Add(x);
-                }
-
-                foreach (Player x in match.AwayTeam.PlayersOnTeam)
-                {
-                    playersInMatch.Add(x);
-                }
+                //Add all away team players to list.
+                playersInMatch.AddRange(match.AwayTeam.PlayersOnTeam);
 
                 return playersInMatch;
             }
