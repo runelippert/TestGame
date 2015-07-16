@@ -86,7 +86,7 @@ namespace Classes
             List<Player> homePlayersAtCoordinate = new List<Player>();
             List<Player> awayPlayerAtCoordinate = new List<Player>();
 
-            foreach (Player somePlayer in match.getPlayersAtCoordinate(new Coordinate(2, 2), match))
+            foreach (Player somePlayer in match.getPlayersAtCoordinate(coordinate, match))
             {
                 if (somePlayer.team.TeamName == match.homeTeam.TeamName)
                 {
