@@ -1,13 +1,13 @@
-﻿using Xunit;
+﻿using System.Collections.Generic;
 using Classes;
-using System.Collections.Generic;
+using Xunit;
 
-namespace UnitTests
+namespace UnitTest
 {
     public class UnitTests
     {
         [Fact]
-        public void getPlayersAtCoordinateTest()
+        public void GetPlayersAtCoordinateTest()
         {
             //Arrange
             Team firsteTeam = new Team() { TeamName = "The greeks" };
@@ -97,13 +97,13 @@ namespace UnitTests
         [InlineData(BasicActions.Actions.Left, 0, 1 )]
         [InlineData(BasicActions.Actions.Rigth, 2, 1)]
         [InlineData(BasicActions.Actions.Protect, 1, 1)]
-        public void takeActionTest(BasicActions.Actions action, int end_x, int end_y )
+        public void TakeActionTest(BasicActions.Actions action, int end_x, int end_y )
         {
             //Arrange
             Player alfred = new Player(){ Name="Alfred", Position=new Coordinate(1,1)};
 
             //act
-            BasicActions.TakeAction(alfred, action);
+            BasicActions.TakeBasicAction(alfred, action);
 
             //Assert
             Assert.Equal(end_x, alfred.Position.X);
@@ -112,7 +112,7 @@ namespace UnitTests
 
 
         [Fact]
-        public void compairePlayerPostionTestNoCoordinate()
+        public void CompairePlayerPostionTestNoCoordinate()
         {
             //Arrange
             Team firsteTeam = new Team() { TeamName = "The greeks" };
@@ -138,7 +138,7 @@ namespace UnitTests
         }
 
         [Fact]
-        public void compairePlayerPostionTestPlayersFromSameTeamOnACoordinate()
+        public void CompairePlayerPostionTestPlayersFromSameTeamOnACoordinate()
         {
             //Arrange
             Team firsteTeam = new Team() { TeamName = "The greeks" };

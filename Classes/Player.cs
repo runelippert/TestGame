@@ -22,17 +22,27 @@ namespace Classes
             Down
         }
         
-        public void GiveOrders(Match match)
+        public void GiveOrders(Team teamToGiveOrders, List<Orders> hand)
         {
             //Give players orders
             //foreach players in match to give them orders
-            foreach (Player player in match.PlayersInMatch(match))
+            foreach (Player player in teamToGiveOrders.PlayersOnTeam)
             {
                 Console.WriteLine("{0} spiller for {1} med nummer {2}", player.Name, player.Team.TeamName, player.ShirtNumber);
                 Console.WriteLine("Give order to {0}", player.Name);
 
-                //Get Direction
+                
+                Console.WriteLine("#### YOUR HAND ####");
+                Console.WriteLine("You have the following Orders on your Hand:");
+                //Write the orders the player has
 
+                foreach (var card in hand)
+                {
+                    Console.WriteLine("You have the order {0}", card);
+
+                }
+
+                Console.WriteLine("Play an order from your hand or select a move");
 
                 Console.WriteLine("Hit arrowkey for direction to move or space to protect for {0}: ", player.Name);
                 var action = new BasicActions();
@@ -74,8 +84,24 @@ namespace Classes
         {
             foreach (Player player in match.PlayersInMatch(match))
             {
-                BasicActions.TakeAction(player, player.Action.Action);
+                BasicActions.TakeBasicAction(player, player.Action.Action);
             }
+        }
+
+        public enum Orders
+        {
+            DirtyProtection,
+            DobbelMove,
+            MoveUp,
+            MoveDown,
+            MoveLeft,
+            MoveRigth,
+            Protect
+        }
+
+        public void ExecuteDobbleMove(Player player)
+        {
+            //Execute orer
         }
     
     }

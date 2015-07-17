@@ -1,31 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Classes
 {
-
-
-    //class playingField
-    //{
-    //       public Coordinate postion { get; set;}
-    //}
-
-
-    public class Team
-    {
-        // a list of players 
-        public List<Player> PlayersOnTeam = new List<Player>();
-
-        public string TeamName { get; set; }
-        
-    }
-
-
-
-    
     class Program
     {
 
@@ -40,6 +17,9 @@ namespace Classes
 
             Player players = new Player();
 
+            var homeTeamHand = thisMatch.HomeTeam.Hand();
+            var awayTeamHand = thisMatch.AwayTeam.Hand();
+
             gameBoard.DrawBoard(thisMatch);
 
             //Turn loop
@@ -47,8 +27,12 @@ namespace Classes
             {
                 Console.WriteLine();
                 Console.WriteLine("Start of turn {0}", turn);
-                //Assign orders to all players in the match
-                players.GiveOrders(thisMatch);
+
+                //Assign orders to all players in the Home match
+                players.GiveOrders(thisMatch.HomeTeam, homeTeamHand);
+
+                //Assign orders to all players in the away team
+                players.GiveOrders(thisMatch.AwayTeam, awayTeamHand);
 
                 //Execute Orders
                 players.ExecuteOrders(thisMatch);

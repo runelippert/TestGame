@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Classes
 {
@@ -19,7 +15,9 @@ namespace Classes
             Protect
         }
 
-        public static Coordinate TakeAction(Player playerToTakeAction, Actions order)
+
+
+        public static Coordinate TakeBasicAction(Player playerToTakeAction, Actions order)
         {
             Coordinate currentPosition = playerToTakeAction.Position;
 
