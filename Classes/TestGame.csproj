@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicActions.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Order.cs" />

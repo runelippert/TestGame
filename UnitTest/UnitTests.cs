@@ -91,26 +91,6 @@ namespace UnitTest
             Assert.Equal(expectedResult, result);
         }
 
-        [Theory]
-        [InlineData(BasicActions.Actions.Up, 1, 0)]
-        [InlineData(BasicActions.Actions.Down, 1,2)]
-        [InlineData(BasicActions.Actions.Left, 0, 1 )]
-        [InlineData(BasicActions.Actions.Rigth, 2, 1)]
-        [InlineData(BasicActions.Actions.Protect, 1, 1)]
-        public void TakeActionTest(BasicActions.Actions action, int end_x, int end_y )
-        {
-            //Arrange
-            Player alfred = new Player(){ Name="Alfred", Position=new Coordinate(1,1)};
-
-            //act
-            BasicActions.TakeBasicAction(alfred, action);
-
-            //Assert
-            Assert.Equal(end_x, alfred.Position.X);
-            Assert.Equal(end_y, alfred.Position.Y);
-        }
-
-
         [Fact]
         public void CompairePlayerPostionTestNoCoordinate()
         {
