@@ -8,8 +8,9 @@ namespace Classes
     {
             //definition of home Team and away team
             public Team HomeTeam { get; set; }
-
             public Team AwayTeam { get; set; }
+            public Ball MatchBall { get; set; }
+            
 
             public List<Player> PlayersInMatch(Match match)
             {
@@ -43,19 +44,19 @@ namespace Classes
             {
                 Team homeTeam = new Team() { TeamName = "The greeks" };
                 Team awayTeam = new Team() { TeamName = "Olsen banden" };
+                Ball ball = new Ball() {};
 
                 Match thisMatch = new Match()
                 {
                     HomeTeam = homeTeam,
-                    AwayTeam = awayTeam
+                    AwayTeam = awayTeam,
+                    MatchBall = ball
                 };
 
-                Player players = new Player();
-
-                homeTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 1, Name = "Alpha", Position = new Coordinate(2, 1), Team = homeTeam });
-                homeTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 2, Name = "Beta", Position = new Coordinate(1, 2), Team = homeTeam });
-                awayTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 10, Name = "Egon", Position = new Coordinate(1, 1), Team = awayTeam });
-                awayTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 11, Name = "Benny", Position = new Coordinate(2, 2), Team = awayTeam });
+                homeTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 1, Name = "Alpha", Position = new Coordinate(1, 1), Team = homeTeam });
+                homeTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 2, Name = "Beta", Position = new Coordinate(1, 3), Team = homeTeam });
+                awayTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 10, Name = "Egon", Position = new Coordinate(1, 5), Team = awayTeam });
+                awayTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 11, Name = "Benny", Position = new Coordinate(1, 5), Team = awayTeam });
 
                 Console.WriteLine("--PRESENTING THE HOME TEAM: {0}", homeTeam.TeamName);
                 foreach (Player player in homeTeam.PlayersOnTeam)
@@ -70,6 +71,10 @@ namespace Classes
                     Console.WriteLine("For {0} first player is #{1} {2}", awayTeam.TeamName, player.ShirtNumber, player.Name);
 
                 }
+
+                thisMatch.MatchBall.PlayerWithBall = homeTeam.PlayersOnTeam[0];
+
+                Console.WriteLine("{0} startes with the ball", homeTeam.PlayersOnTeam[0]);
                 
                 return thisMatch;
             }

@@ -101,9 +101,13 @@ namespace Classes
             Console.Write("|");
             if (playersAtCoordinate.Count > 0)
             {
-                foreach (var x in match.GetPlayersAtCoordinate(coordinate, match))
+                foreach (var player in match.GetPlayersAtCoordinate(coordinate, match))
                 {
-                    Console.Write(x.Name + " ");
+                    Console.Write(player.Name + " ");
+                    if (match.MatchBall.PlayerWithBall == player)
+                    {
+                        Console.Write("(o)");
+                    }
                 }
             }
             Console.Write("{0},{1}", coordinate.X, coordinate.Y);
