@@ -74,43 +74,6 @@ namespace Classes
                 return thisMatch;
             }
 
-        public List<Coordinate> GetAllCordinatesWithPlayersFromBothTeams(Match match)
-        {
-            Board board = new Board();
-
-            List<Coordinate> result = new List<Coordinate>();
-
-            //Runs through all coordinates on the board
-            foreach (Coordinate coordinate in board.BoardCordinates())
-            {
-                List<Player> players = GetPlayersAtCoordinate(coordinate, match);
-
-                //Runs through all players at a coordinate to get team
-                foreach(Player player in players)
-                {
-                    List<Team> homeTeamPlayer = new List<Team>();
-
-                    if (player.Team == match.HomeTeam)
-                    {
-
-                    }
-                }
-
-            }
-            
-            
-            //Foreach coordinate
-            //Get players at coordinate
-            //Check if there is more then 1 team
-            //add coordinate to list
-                
-            //OR
-
-
-
-            return result;
-        }
-
         //GetPlayers on homeTeam
         //Add position to a list of coordinates that has players from the home team
         //GetPlayers on AwayTeam
@@ -146,9 +109,6 @@ namespace Classes
             return result;
         }
 
-
-
-            
 
     }
 }

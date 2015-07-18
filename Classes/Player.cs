@@ -66,6 +66,9 @@ namespace Classes
                     case ConsoleKey.Spacebar:
                         playerOrder = Orders.Protect;
                         break;
+                    case ConsoleKey.D0:
+                        playerOrder = Orders.DobbelMove;
+                        break;
                 }
 
                 //Assign player Order
@@ -100,6 +103,10 @@ namespace Classes
                 {
                     executeProtection(player);
                 }
+                if (player.PlayerOrder == Orders.DobbelMove)
+                {
+                    ExecuteDobbleMove(player);
+                }
             }
         }
 
@@ -112,11 +119,6 @@ namespace Classes
             MoveLeft,
             MoveRigth,
             Protect
-        }
-
-        public void ExecuteDobbleMove(Player player)
-        {
-            //Execute orer
         }
 
         private void ExecuteMoveUp(Player playerToTakeAction)
@@ -146,6 +148,36 @@ namespace Classes
         private void executeProtection(Player playerToTakeAction)
         {
             Console.WriteLine("EXECUTE: {0} protecting", playerToTakeAction.Name);
+        }
+
+        public void ExecuteDobbleMove(Player player)
+        {
+            Console.WriteLine("");
+            Console.WriteLine("EXECUTE: Double move");
+
+
+            for (int i = 0; i < 2; i++ )
+            {
+                Console.WriteLine("Hit arrow key for move");
+                ConsoleKeyInfo keyInfo = Console.ReadKey();
+
+                switch (keyInfo.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        ExecuteMoveUp(player);
+                        break;
+                    case ConsoleKey.DownArrow:
+                        ExecuteMoveDown(player);
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        executeMoveLeft(player);
+                        break;
+                    case ConsoleKey.RightArrow:
+                        executeMoveRigth(player);
+                        break;
+                }
+            }
+            //Execute orer
         }
     
     }
