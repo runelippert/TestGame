@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MoreLinq;
 
 namespace Classes
 {
@@ -55,8 +56,10 @@ namespace Classes
 
                 homeTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 1, Name = "Alpha", Position = new Coordinate(1, 1), Team = homeTeam });
                 homeTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 2, Name = "Beta", Position = new Coordinate(1, 3), Team = homeTeam });
+                homeTeam.PlayersOnTeam.Add(new Player() {ShirtNumber = 3, Name = "Gamma", Position = new Coordinate(1,3), Team = homeTeam});
                 awayTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 10, Name = "Egon", Position = new Coordinate(1, 5), Team = awayTeam });
                 awayTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 11, Name = "Benny", Position = new Coordinate(1, 5), Team = awayTeam });
+                awayTeam.PlayersOnTeam.Add(new Player() {ShirtNumber = 13, Name = "Kjeld", Position = new Coordinate(1,3), Team = awayTeam});
 
                 Console.WriteLine("--PRESENTING THE HOME TEAM: {0}", homeTeam.TeamName);
                 foreach (Player player in homeTeam.PlayersOnTeam)
@@ -88,13 +91,11 @@ namespace Classes
         {
             List<Coordinate> result = new List<Coordinate>();
 
-            List<Coordinate> homeTeamCoordinates = new List<Coordinate>();
             List<Coordinate> awayTeamCoordinates = new List<Coordinate>();
 
-            foreach(Player player in match.HomeTeam.PlayersOnTeam)
-            {
-                homeTeamCoordinates.Add(player.Position);
-            }
+            List<Coordinate> homeTeamCoordinates = match.HomeTeam.PlayersOnTeam.Select(player => player.Position).ToList();
+
+            IEnumerable<Coordinate> homeTeamCoordinatesNoDublicates = homeTeamCoordinates.DistinctBy(x => x.X).DistinctBy(y => y.Y);
 
             foreach(Player player in match.AwayTeam.PlayersOnTeam)
             {
@@ -102,15 +103,9 @@ namespace Classes
             }
 
             //Compaire list
-            foreach(Coordinate coordinate in homeTeamCoordinates)
-            {
-                if (awayTeamCoordinates.Contains(coordinate))
-                {
-                    result.Add(coordinate);
-                }
-            }
+            result.AddRange(homeTeamCoordinatesNoDublicates.Where(coordinate => awayTeamCoordinates.Contains(coordinate)));
 
-
+            //Remove dublicates
             return result;
         }
 

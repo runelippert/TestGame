@@ -116,20 +116,25 @@ namespace Classes
 
             ResultOfEngagement engagementResult = FindWinner(match, modifiedGreekRoll, modifiedOlsenRoll);
 
+            var downedPlayer = new Player();
             //add effect (down player, equals half a player next round and can't move.
             if (engagementResult != ResultOfEngagement.Tie)
             {
-                EffectOfEngangement(engagementResult, homePlayersAtCoordinate, awayPlayerAtCoordinate);
+                downedPlayer = EffectOfEngangement(engagementResult, homePlayersAtCoordinate, awayPlayerAtCoordinate);
             }
             else
             {
                 Console.WriteLine("Its was a tie, no player downed");
             }
 
-            //EffectOfEngagement (player at coordinate from loosing team)
-
-            //If home team wins the engangement
-
+            if (downedPlayer != null)
+            {
+                if (match.MatchBall.PlayerWithBall == downedPlayer)
+                {
+                    //give player to another player at that coordinate
+                }
+                Console.WriteLine(downedPlayer.Name + " " + downedPlayer.State);
+            }
 
             Console.WriteLine(engagementResult.ToString());
 

@@ -108,6 +108,10 @@ namespace Classes
                     {
                         Console.Write("(o)");
                     }
+                    if (player.State == Player.PlayerState.Down)
+                    {
+                        Console.Write("(down)");
+                    }
                 }
             }
             Console.Write("{0},{1}", coordinate.X, coordinate.Y);

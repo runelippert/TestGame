@@ -44,6 +44,7 @@
     <Compile Include="Ball.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="Match.cs" />
+    <Compile Include="MoreLinq\MoreEnumerable.DistinctBy.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
@@ -53,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

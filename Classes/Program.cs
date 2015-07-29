@@ -42,6 +42,7 @@ namespace Classes
                 List<Coordinate> engagements = thisMatch.CompairePlayersCoordinates(thisMatch);
                 Rolls roll = new Rolls();
 
+                //Roll for all engagements
                 foreach (Coordinate coordinate in engagements)
                 {
                     Console.WriteLine("Engagement at {0},{1}", coordinate.X, coordinate.Y);

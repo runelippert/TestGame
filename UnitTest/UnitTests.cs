@@ -49,11 +49,13 @@ namespace UnitTest
             //Arrange
             Team firsteTeam = new Team() { TeamName = "The greeks" };
             Team secondTeam = new Team() { TeamName = "Olsen banden" };
+            Ball ball = new Ball();
 
             Match thisMatch = new Match()
             {
                 HomeTeam = firsteTeam,
-                AwayTeam = secondTeam
+                AwayTeam = secondTeam,
+                MatchBall = ball
             };
 
             firsteTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 1, Name = "Alpha", Position = new Coordinate(2, 1), Team = firsteTeam });
@@ -66,7 +68,7 @@ namespace UnitTest
             roll.RollForEngagement(new Coordinate(1, 1), thisMatch);
 
             //Assert
-            //TO DO roll for engagement needs to be updated to return a value or a string. 
+            
 
         }
 
@@ -158,8 +160,10 @@ namespace UnitTest
 
             firsteTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 1, Name = "Alpha", Position = new Coordinate(1, 1), Team = firsteTeam });
             firsteTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 2, Name = "Beta", Position = new Coordinate(3, 2), Team = firsteTeam });
-            secondTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 10, Name = "Egon", Position = new Coordinate(3, 2), Team = secondTeam });
-            secondTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 11, Name = "Benny", Position = new Coordinate(3, 2), Team = secondTeam });
+            secondTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 10, Name = "Egon", Position = new Coordinate(5, 2), Team = secondTeam });
+            secondTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 11, Name = "Benny", Position = new Coordinate(6, 2), Team = secondTeam });
+            firsteTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 3, Name = "Gamma", Position = new Coordinate(3, 2), Team = firsteTeam });
+            secondTeam.PlayersOnTeam.Add(new Player() { ShirtNumber = 13, Name = "Kjeld", Position = new Coordinate(3, 2), Team = secondTeam });
 
 
             //Act

@@ -28,53 +28,63 @@ namespace Classes
             //foreach players in match to give them orders
             foreach (Player player in teamToGiveOrders.PlayersOnTeam)
             {
-                Console.WriteLine("{0} spiller for {1} med nummer {2}", player.Name, player.Team.TeamName, player.ShirtNumber);
-                Console.WriteLine("Give order to {0}", player.Name);
-                
-                Console.WriteLine("#### YOUR HAND ####");
-                Console.WriteLine("You have the following Orders on your Hand:");
-                //Write the orders the player has
-
-                for (int index = 0; index < hand.Count; index++)
+                if (player.State == PlayerState.Up)
                 {
-                    var card = hand[index];
-                    Console.Write("#" + index);
-                    Console.WriteLine(" " + card);
+                    Console.WriteLine("{0} spiller for {1} med nummer {2}", player.Name, player.Team.TeamName, player.ShirtNumber);
+                    Console.WriteLine("Give order to {0}", player.Name);
+
+                    Console.WriteLine("#### YOUR HAND ####");
+                    Console.WriteLine("You have the following Orders on your Hand:");
+                    //Write the orders the player has
+
+                    for (int index = 0; index < hand.Count; index++)
+                    {
+                        var card = hand[index];
+                        Console.Write("#" + index);
+                        Console.WriteLine(" " + card);
+                    }
+
+                    Console.WriteLine("Play an order from your hand or select a move");
+
+                    Console.WriteLine("Hit arrowkey for direction to move or space to protect for {0}: ", player.Name);
+                    var playerOrder = new Orders();
+
+                    ConsoleKeyInfo keyInfo = Console.ReadKey();
+
+                    switch (keyInfo.Key)
+                    {
+                        case ConsoleKey.UpArrow:
+                            playerOrder = Orders.MoveUp;
+                            break;
+                        case ConsoleKey.DownArrow:
+                            playerOrder = Orders.MoveDown;
+                            break;
+                        case ConsoleKey.LeftArrow:
+                            playerOrder = Orders.MoveLeft;
+                            break;
+                        case ConsoleKey.RightArrow:
+                            playerOrder = Orders.MoveRigth;
+                            break;
+                        case ConsoleKey.Spacebar:
+                            playerOrder = Orders.Protect;
+                            break;
+                        case ConsoleKey.D0:
+                            playerOrder = Orders.DobbelMove;
+                            break;
+                    }
+
+                    //Assign player Order
+                    player.PlayerOrder = playerOrder;
+
+                    Console.WriteLine(player.Name + " has the order " + player.PlayerOrder);
                 }
-
-                Console.WriteLine("Play an order from your hand or select a move");
-
-                Console.WriteLine("Hit arrowkey for direction to move or space to protect for {0}: ", player.Name);
-                var playerOrder = new Orders();
-
-                ConsoleKeyInfo keyInfo = Console.ReadKey();
-
-                switch (keyInfo.Key)
+                if (player.State == PlayerState.Down)
                 {
-                    case ConsoleKey.UpArrow:
-                        playerOrder = Orders.MoveUp;
-                        break;
-                    case ConsoleKey.DownArrow:
-                        playerOrder = Orders.MoveDown;
-                        break;
-                    case ConsoleKey.LeftArrow:
-                        playerOrder = Orders.MoveLeft;
-                        break;
-                    case ConsoleKey.RightArrow:
-                        playerOrder = Orders.MoveRigth;
-                        break;
-                    case ConsoleKey.Spacebar:
-                        playerOrder = Orders.Protect;
-                        break;
-                    case ConsoleKey.D0:
-                        playerOrder = Orders.DobbelMove;
-                        break;
+                    player.State = PlayerState.Up;
+                    player.PlayerOrder = Orders.NoOrder;
+                    Console.WriteLine("{0} was down and is now up, can take no order this turn");
+                    
                 }
-
-                //Assign player Order
-                player.PlayerOrder = playerOrder;
-
-                Console.WriteLine(player.Name + " has the order " + player.PlayerOrder);
                 Console.WriteLine("----------------------------");
             }
     }
@@ -112,6 +122,7 @@ namespace Classes
 
         public enum Orders
         {
+            NoOrder,
             DirtyProtection,
             DobbelMove,
             MoveUp,
